@@ -412,7 +412,14 @@ p strong{color:var(--espresso);font-weight:700;}
 <h3 class="reveal">6. When in doubt, show — don't tell</h3>
 <p class="reveal">Screenshots, error logs, example code, sample outputs, URLs to documentation — anything concrete you can paste or show the AI will outperform a verbal description.</p>
 
-<h3 class="reveal">7. Git is your save button — let Claude handle it</h3>
+<h3 class="reveal">7. If the answer feels wrong, tell it to search the web</h3>
+<p class="reveal"><strong>AI models run on training data — and training data gets stale.</strong> If the AI confidently tells you something that doesn't match what you're seeing, or gives you an answer that just feels off, tell it: <em>"Search the web to verify that."</em> Most AI coding tools (Claude Code, Codex, Cursor) can search the internet when you ask them to.</p>
+<p class="reveal">This is especially important for anything that changes frequently — API docs, library versions, framework syntax, pricing pages, or recent announcements. The AI might be working from information that was accurate 6 months ago but isn't anymore.</p>
+<div class="callout bad reveal"><p><strong style="color:var(--red);">✗ Bad:</strong> Trusting the AI when it says "use <code>api.v2.create()</code>" without checking — that method might have been renamed or removed.</p></div>
+<div class="callout good reveal"><p><strong style="color:var(--green);">✓ Good:</strong> "That doesn't look right. Search the web for the current API docs and verify."</p></div>
+<div class="callout tip reveal"><p><em>Rule of thumb: if the AI's answer involves a specific version number, API endpoint, or syntax you haven't seen before — ask it to verify with a web search before you build on it.</em></p></div>
+
+<h3 class="reveal">8. Git is your save button — let Claude handle it</h3>
 <p class="reveal"><strong>You don't need to know git.</strong> You just need to know that it's your undo button. Here's the workflow:</p>
 <p class="reveal">When you start working, tell Claude: <em>"Create a new branch called feature/[your-feature-name] and work in a worktree."</em> This gives you your own isolated workspace where nothing you do can break anyone else's work.</p>
 <p class="reveal">As you build, tell Claude: <em>"Commit this."</em> Every commit is a save point. If something breaks, you can tell Claude <em>"undo that last change"</em> or <em>"go back to the last working version"</em> and it'll handle it.</p>
@@ -429,7 +436,8 @@ p strong{color:var(--espresso);font-weight:700;}
   4. Use planning mode (Shift+Tab) to break down big tasks for you.<br>
   5. You're the pilot. If something looks off, say so. Fresh conversations are free.<br>
   6. Show, don't tell. Paste the actual error. Screenshot the actual screen.<br>
-  7. Git = your save button. Tell Claude to commit often and create a PR when done.</p>
+  7. Answer feels wrong? Tell the AI to search the web — its training data goes stale.<br>
+  8. Git = your save button. Tell Claude to commit often and create a PR when done.</p>
 </div>
 
 <hr class="divider">
@@ -444,7 +452,7 @@ p strong{color:var(--espresso);font-weight:700;}
   <li>Install Claude Code — <code style="background:var(--warm);padding:2px 8px;border-radius:6px;font-size:13px;">npm install -g @anthropic-ai/claude-code</code></li>
   <li>Install the Codex app — <a href="https://developers.openai.com/codex/app" style="color:var(--caramel);">developers.openai.com/codex/app</a></li>
   <li><em>(Optional)</em> Install Cursor — <a href="https://cursor.com" style="color:var(--caramel);">cursor.com</a> (AI code editor, great if you prefer a visual editor)</li>
-  <li>Make sure Git works and you can clone a repo <em style="color:var(--mocha);font-size:12px;">(see tip #7 in Working With AI — Claude handles git for you)</em></li>
+  <li>Make sure Git works and you can clone a repo <em style="color:var(--mocha);font-size:12px;">(see tip #8 in Working With AI — Claude handles git for you)</em></li>
   <li>Read this playbook</li>
   <li>Reply in Slack with which role you want</li>
 </ul>
