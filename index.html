@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KT Agent — Team Home ☕</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --cream:#faf3eb;--warm:#f5ebe0;--latte:#e6d5c3;--caramel:#c4a882;
+  --espresso:#5c4033;--espresso-soft:#7a6252;--mocha:#8b6f5e;
+  --blush:#e8c4b8;--sage:#b5c4a8;--sage-deep:#8da67e;--sage-light:#d4e0cc;
+  --rose:#d4a0a0;--honey:#e8c170;--honey-light:#f0d998;
+  --white:#fffcf8;--cloud:rgba(255,252,248,0.6);
+}
+
+body{
+  background:var(--cream);color:var(--espresso);
+  font-family:'Quicksand',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
+
+/* ═══ GRAIN OVERLAY ═══ */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  animation:grain 0.4s steps(1) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0);}25%{transform:translate(-2px,3px);}
+  50%{transform:translate(3px,-1px);}75%{transform:translate(-1px,2px);}
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes steam{
+  0%{transform:translateY(0) scaleX(1);opacity:0;}
+  10%{opacity:0.6;}40%{opacity:0.3;}
+  100%{transform:translateY(-48px) scaleX(1.8);opacity:0;}
+}
+@keyframes steamSlow{
+  0%{transform:translateY(0) scaleX(1);opacity:0;}
+  12%{opacity:0.5;}45%{opacity:0.2;}
+  100%{transform:translateY(-42px) scaleX(2);opacity:0;}
+}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+@keyframes bobSlow{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes sway{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
+@keyframes swayGentle{0%,100%{transform:rotate(-1.5deg);}50%{transform:rotate(1.5deg);}}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);}33%{transform:translateY(-8px) translateX(4px);}66%{transform:translateY(-3px) translateX(-3px);}}
+@keyframes sparkle{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
+@keyframes pour{0%,100%{transform:scaleY(1);}50%{transform:scaleY(1.05);}}
+@keyframes wiggle{0%,100%{transform:rotate(0);}25%{transform:rotate(-2deg);}75%{transform:rotate(2deg);}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes heartBeat{0%,100%{transform:scale(1);}15%{transform:scale(1.15);}30%{transform:scale(1);}}
+@keyframes cloudDrift{0%{transform:translateX(-10px);}100%{transform:translateX(10px);}}
+@keyframes ripple{0%{transform:scale(0.95);opacity:0.5;}50%{transform:scale(1.05);opacity:0.2;}100%{transform:scale(0.95);opacity:0.5;}}
+
+/* ═══ BG DECOR ═══ */
+.bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;}
+.blob-1{width:350px;height:350px;background:radial-gradient(circle,rgba(212,160,160,0.1),transparent 70%);top:5%;right:0;animation:float 12s ease-in-out infinite;}
+.blob-2{width:300px;height:300px;background:radial-gradient(circle,rgba(181,196,168,0.12),transparent 70%);bottom:15%;left:-5%;animation:float 15s ease-in-out infinite 3s;}
+.blob-3{width:250px;height:250px;background:radial-gradient(circle,rgba(232,193,112,0.08),transparent 70%);top:45%;left:30%;animation:float 18s ease-in-out infinite 6s;}
+.blob-4{width:200px;height:200px;background:radial-gradient(circle,rgba(232,196,184,0.1),transparent 70%);top:20%;left:10%;animation:float 14s ease-in-out infinite 2s;}
+
+/* ═══ FLOATING DECOR ELEMENTS ═══ */
+.decor{position:fixed;pointer-events:none;z-index:1;}
+
+/* ═══ TOPBAR ═══ */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 40px;position:relative;z-index:10;
+  animation:fadeIn 0.6s ease;
+}
+.brand{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;
+  color:var(--espresso);display:flex;align-items:center;gap:10px;
+}
+.brand-icon{animation:bobSlow 3s ease-in-out infinite;}
+.toplinks{display:flex;gap:8px;}
+.toplinks a{
+  text-decoration:none;color:var(--mocha);font-size:13px;font-weight:600;
+  padding:7px 16px;border-radius:20px;transition:all 0.3s;
+}
+.toplinks a:hover{background:var(--warm);color:var(--espresso);}
+
+/* ═══ HERO ═══ */
+.hero{
+  max-width:760px;margin:0 auto;padding:48px 24px 20px;
+  text-align:center;position:relative;z-index:5;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--warm);border:1.5px solid var(--latte);
+  border-radius:50px;padding:7px 20px;
+  font-size:12px;font-weight:700;color:var(--mocha);
+  margin-bottom:20px;animation:fadeUp 0.6s ease 0.1s both;
+}
+.hero-badge .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--sage);
+  animation:sparkle 2s ease-in-out infinite;
+}
+.hero h1{
+  font-family:'Zen Maru Gothic',sans-serif;
+  font-size:clamp(30px,6vw,50px);font-weight:700;
+  line-height:1.25;color:var(--espresso);margin-bottom:14px;
+  animation:fadeUp 0.6s ease 0.2s both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,16px);color:var(--espresso-soft);
+  line-height:1.7;max-width:480px;margin:0 auto 30px;font-weight:500;
+  animation:fadeUp 0.6s ease 0.3s both;
+}
+
+/* ═══ CTA BUTTONS ═══ */
+.cta-row{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.6s ease 0.4s both;
+}
+.btn{
+  padding:13px 32px;border-radius:50px;font-family:'Quicksand',sans-serif;
+  font-size:14px;font-weight:700;text-decoration:none;border:none;
+  cursor:pointer;transition:all 0.35s ease;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-warm{
+  background:var(--caramel);color:var(--white);
+  box-shadow:0 4px 18px rgba(196,168,130,0.35);
+}
+.btn-warm:hover{background:var(--mocha);transform:translateY(-3px);box-shadow:0 6px 24px rgba(196,168,130,0.45);}
+.btn-soft{
+  background:var(--white);color:var(--caramel);
+  box-shadow:0 4px 14px rgba(0,0,0,0.05);border:1.5px solid var(--latte);
+}
+.btn-soft:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.08);border-color:var(--caramel);}
+
+/* ═══ COFFEE SCENE (centerpiece illustration) ═══ */
+.scene{
+  max-width:700px;margin:32px auto 0;padding:0 24px;
+  position:relative;z-index:5;
+  animation:fadeUp 0.8s ease 0.5s both;
+}
+.scene svg{width:100%;height:auto;display:block;}
+
+/* ═══ SECTION: TEAM CARDS ═══ */
+.section{max-width:800px;margin:0 auto;padding:48px 24px;position:relative;z-index:5;}
+.section-label{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:12px;
+  font-weight:700;color:var(--sage-deep);text-transform:uppercase;
+  letter-spacing:3px;margin-bottom:8px;text-align:center;
+}
+.section-title{
+  font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(22px,4vw,30px);
+  font-weight:700;text-align:center;margin-bottom:28px;color:var(--espresso);
+}
+
+.role-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:14px;
+}
+.role-card{
+  background:var(--white);border:1.5px solid var(--latte);
+  border-radius:20px;padding:20px;
+  transition:all 0.35s ease;cursor:default;
+  animation:fadeUp 0.5s ease both;
+}
+.role-card:nth-child(1){animation-delay:0.1s;}
+.role-card:nth-child(2){animation-delay:0.15s;}
+.role-card:nth-child(3){animation-delay:0.2s;}
+.role-card:nth-child(4){animation-delay:0.25s;}
+.role-card:nth-child(5){animation-delay:0.3s;}
+.role-card:nth-child(6){animation-delay:0.35s;}
+.role-card:nth-child(7){animation-delay:0.4s;}
+.role-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 28px rgba(92,64,51,0.08);
+  border-color:var(--caramel);
+}
+.role-emoji{font-size:24px;margin-bottom:8px;display:inline-block;animation:wiggle 3s ease-in-out infinite;}
+.role-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;margin-bottom:3px;}
+.role-desc{font-size:12px;color:var(--mocha);line-height:1.5;font-weight:500;}
+.role-person{
+  margin-top:10px;font-size:11px;font-weight:700;
+  color:var(--sage-deep);background:var(--sage-light);
+  display:inline-block;padding:3px 12px;border-radius:20px;
+}
+.role-open{
+  margin-top:10px;font-size:11px;font-weight:700;
+  color:var(--caramel);background:rgba(232,193,112,0.15);
+  display:inline-block;padding:3px 12px;border-radius:20px;
+}
+
+/* ═══ LINKS SECTION ═══ */
+.links-row{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  margin-top:8px;
+}
+.link-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--white);border:1.5px solid var(--latte);
+  border-radius:50px;padding:10px 22px;
+  font-size:13px;font-weight:600;color:var(--espresso);
+  text-decoration:none;transition:all 0.3s;
+}
+.link-pill:hover{
+  border-color:var(--caramel);transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(92,64,51,0.06);
+}
+.link-pill .pill-icon{font-size:16px;}
+
+/* ═══ FOOTER ═══ */
+.footer{
+  text-align:center;padding:40px 24px 32px;
+  font-size:12px;color:var(--mocha);font-weight:600;
+  position:relative;z-index:5;
+}
+.footer-heart{display:inline-block;animation:heartBeat 1.5s ease-in-out infinite;color:var(--rose);}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+  .topbar{padding:14px 18px;flex-direction:column;gap:10px;}
+  .role-grid{grid-template-columns:1fr;}
+  .cta-row{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- BG Blobs -->
+<div class="bg-blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="brand">
+    <span class="brand-icon">☕</span> KT Agent
+  </div>
+  <div class="toplinks">
+    <a href="#team">Team</a>
+    <a href="#playbook">Playbook</a>
+    <a href="#links">Links</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Hackathon · March 25</div>
+  <h1>Knowledge Transfer Agent</h1>
+  <p>An AI that interviews your team, captures what's undocumented, and publishes a structured handoff — so knowledge never walks out the door.</p>
+  <div class="cta-row">
+    <a href="#playbook" class="btn btn-warm">📖 Read the Playbook</a>
+  </div>
+</div>
+
+<!-- ═══ COFFEE SCENE ═══ -->
+<div class="scene">
+<svg viewBox="0 0 700 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Table surface -->
+  <rect x="0" y="170" width="700" height="50" rx="16" fill="#e6d5c3" opacity="0.5"/>
+  <rect x="0" y="168" width="700" height="6" rx="3" fill="#d4c0a8" opacity="0.4"/>
+
+  <!-- ── Left plant ── -->
+  <g style="animation:swayGentle 4s ease-in-out infinite;" transform-origin="130 170">
+    <!-- pot -->
+    <rect x="108" y="140" width="45" height="34" rx="8" fill="#d4a0a0"/>
+    <rect x="104" y="136" width="53" height="10" rx="5" fill="#c89090"/>
+    <!-- soil -->
+    <ellipse cx="130" cy="143" rx="20" ry="4" fill="#8b6f5e"/>
+    <!-- stems & leaves -->
+    <g style="animation:sway 5s ease-in-out infinite;" transform-origin="130 140">
+      <path d="M130 140 Q125 110 115 90" stroke="#8da67e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="110" cy="87" rx="12" ry="7" fill="#b5c4a8" transform="rotate(-30 110 87)"/>
+      <path d="M130 140 Q135 105 145 85" stroke="#8da67e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="149" cy="82" rx="11" ry="6.5" fill="#a8bb9a" transform="rotate(25 149 82)"/>
+      <path d="M130 140 Q128 115 120 95" stroke="#8da67e" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="116" cy="93" rx="9" ry="5.5" fill="#c2d4b8" transform="rotate(-15 116 93)"/>
+      <path d="M130 140 Q138 112 150 100" stroke="#8da67e" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <ellipse cx="154" cy="97" rx="10" ry="5.5" fill="#b5c4a8" transform="rotate(20 154 97)"/>
+    </g>
+  </g>
+
+  <!-- ── Big coffee cup (center) ── -->
+  <g style="animation:bobSlow 4s ease-in-out infinite;">
+    <!-- cup body -->
+    <path d="M290 108 L296 168 L404 168 L410 108 Z" fill="var(--white)" stroke="var(--latte)" stroke-width="1.5"/>
+    <!-- cup band -->
+    <rect x="290" y="128" width="120" height="18" rx="2" fill="var(--warm)" opacity="0.6"/>
+    <!-- handle -->
+    <path d="M410 120 Q435 120 435 140 Q435 160 410 160" fill="none" stroke="var(--latte)" stroke-width="3" stroke-linecap="round"/>
+    <!-- latte art (heart) -->
+    <path d="M340 125 Q345 118 350 123 Q355 118 360 125 Q360 133 350 140 Q340 133 340 125Z" fill="var(--blush)" opacity="0.5"/>
+    <!-- saucer -->
+    <ellipse cx="350" cy="172" rx="72" ry="10" fill="var(--white)" stroke="var(--latte)" stroke-width="1"/>
+
+    <!-- Steam wisps -->
+    <g opacity="0.6">
+      <circle cx="335" cy="100" r="4" fill="var(--cloud)">
+        <animate attributeName="cy" values="100;58" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="3;8" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.5;0" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="350" cy="95" r="3.5" fill="var(--cloud)">
+        <animate attributeName="cy" values="95;50" dur="3.2s" repeatCount="indefinite" begin="0.5s"/>
+        <animate attributeName="r" values="3;9" dur="3.2s" repeatCount="indefinite" begin="0.5s"/>
+        <animate attributeName="opacity" values="0;0.6;0" dur="3.2s" repeatCount="indefinite" begin="0.5s"/>
+      </circle>
+      <circle cx="365" cy="98" r="3" fill="var(--cloud)">
+        <animate attributeName="cy" values="98;55" dur="3s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="r" values="2.5;7" dur="3s" repeatCount="indefinite" begin="1s"/>
+        <animate attributeName="opacity" values="0;0.45;0" dur="3s" repeatCount="indefinite" begin="1s"/>
+      </circle>
+      <circle cx="342" cy="92" r="3" fill="var(--cloud)">
+        <animate attributeName="cy" values="92;48" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+        <animate attributeName="r" values="2;7.5" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+        <animate attributeName="opacity" values="0;0.4;0" dur="3.5s" repeatCount="indefinite" begin="1.5s"/>
+      </circle>
+      <circle cx="358" cy="96" r="2.5" fill="var(--cloud)">
+        <animate attributeName="cy" values="96;52" dur="2.6s" repeatCount="indefinite" begin="2s"/>
+        <animate attributeName="r" values="2;6" dur="2.6s" repeatCount="indefinite" begin="2s"/>
+        <animate attributeName="opacity" values="0;0.5;0" dur="2.6s" repeatCount="indefinite" begin="2s"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- ── Small espresso cup (right) ── -->
+  <g style="animation:bob 3.5s ease-in-out infinite 0.5s;">
+    <path d="M510 138 L514 168 L566 168 L570 138 Z" fill="var(--white)" stroke="var(--latte)" stroke-width="1.2"/>
+    <path d="M570 145 Q582 145 582 155 Q582 165 570 165" fill="none" stroke="var(--latte)" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="540" cy="170" rx="38" ry="7" fill="var(--white)" stroke="var(--latte)" stroke-width="1"/>
+    <!-- tiny steam -->
+    <g opacity="0.5">
+      <circle cx="536" cy="132" r="2.5" fill="var(--cloud)">
+        <animate attributeName="cy" values="132;100" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;5" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.5;0" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="545" cy="130" r="2" fill="var(--cloud)">
+        <animate attributeName="cy" values="130;95" dur="2.8s" repeatCount="indefinite" begin="0.7s"/>
+        <animate attributeName="r" values="1.5;5.5" dur="2.8s" repeatCount="indefinite" begin="0.7s"/>
+        <animate attributeName="opacity" values="0;0.4;0" dur="2.8s" repeatCount="indefinite" begin="0.7s"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- ── Croissant ── -->
+  <g style="animation:bobSlow 5s ease-in-out infinite 1s;">
+    <path d="M468 158 Q475 142 488 148 Q498 138 508 148 Q518 142 525 158 Z" fill="#e8c170" stroke="#d4a850" stroke-width="1"/>
+    <path d="M478 155 Q488 145 498 148 Q508 145 515 155" fill="none" stroke="#d4a850" stroke-width="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- ── Open book (left-center) ── -->
+  <g style="animation:bobSlow 4.5s ease-in-out infinite 0.3s;">
+    <path d="M200 168 L200 140 Q230 135 250 140 L250 168 Z" fill="var(--white)" stroke="var(--latte)" stroke-width="1"/>
+    <path d="M250 168 L250 140 Q270 135 300 140 L300 168 Z" fill="#faf6f0" stroke="var(--latte)" stroke-width="1"/>
+    <!-- page lines -->
+    <line x1="210" y1="148" x2="242" y2="146" stroke="var(--latte)" stroke-width="0.6" opacity="0.5"/>
+    <line x1="210" y1="153" x2="240" y2="151" stroke="var(--latte)" stroke-width="0.6" opacity="0.4"/>
+    <line x1="210" y1="158" x2="238" y2="156" stroke="var(--latte)" stroke-width="0.6" opacity="0.3"/>
+    <line x1="258" y1="146" x2="290" y2="148" stroke="var(--latte)" stroke-width="0.6" opacity="0.5"/>
+    <line x1="258" y1="151" x2="288" y2="153" stroke="var(--latte)" stroke-width="0.6" opacity="0.4"/>
+    <!-- spine -->
+    <line x1="250" y1="138" x2="250" y2="168" stroke="var(--latte)" stroke-width="1.2"/>
+  </g>
+
+  <!-- ── Right plant (small succulent) ── -->
+  <g style="animation:swayGentle 5s ease-in-out infinite 1s;" transform-origin="600 170">
+    <rect x="585" y="148" width="30" height="24" rx="6" fill="var(--sage)"/>
+    <rect x="582" y="145" width="36" height="8" rx="4" fill="#a8bb9a"/>
+    <ellipse cx="600" cy="148" rx="12" ry="3" fill="#8da67e"/>
+    <ellipse cx="600" cy="140" rx="8" ry="12" fill="var(--sage-light)"/>
+    <ellipse cx="592" cy="143" rx="6" ry="9" fill="var(--sage)" transform="rotate(-15 592 143)"/>
+    <ellipse cx="608" cy="143" rx="6" ry="9" fill="var(--sage)" transform="rotate(15 608 143)"/>
+    <ellipse cx="600" cy="138" rx="5" ry="8" fill="#c2d4b8"/>
+  </g>
+
+  <!-- ── Sparkles ── -->
+  <g>
+    <circle cx="320" cy="70" r="2" fill="var(--honey-light)"><animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/><animate attributeName="r" values="1.5;2.5;1.5" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="380" cy="55" r="1.5" fill="var(--blush)"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.4s" repeatCount="indefinite" begin="0.5s"/></circle>
+    <circle cx="355" cy="40" r="1.8" fill="var(--honey)"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="2.8s" repeatCount="indefinite" begin="1s"/></circle>
+    <circle cx="500" cy="110" r="1.5" fill="var(--rose)"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.2s" repeatCount="indefinite" begin="0.3s"/></circle>
+    <circle cx="170" cy="80" r="1.5" fill="var(--sage)"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite" begin="0.8s"/></circle>
+  </g>
+
+</svg>
+</div>
+
+<!-- ═══ TEAM ═══ -->
+<div class="section" id="team">
+  <div class="section-label">✿ The Team</div>
+  <div class="section-title">Who's Building This</div>
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-emoji">🏗️</div>
+      <div class="role-name">The Captain</div>
+      <div class="role-desc">Architect, wiring, AI engine, and demo</div>
+      <div class="role-person">Kioja</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">📋</div>
+      <div class="role-name">Interview Designer</div>
+      <div class="role-desc">Questions the AI asks + QA lead</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">📄</div>
+      <div class="role-name">Doc Template</div>
+      <div class="role-desc">Handoff doc design + synthesis prompt</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">🎨</div>
+      <div class="role-name">Landing + Demo Prep</div>
+      <div class="role-desc">Landing page, demo data, backup video</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">💬</div>
+      <div class="role-name">Chat UI Builder</div>
+      <div class="role-desc">The interview screen users interact with</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">🔍</div>
+      <div class="role-name">Glean Integration</div>
+      <div class="role-desc">Enterprise search lookup by email</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+    <div class="role-card">
+      <div class="role-emoji">📡</div>
+      <div class="role-name">Confluence Publisher</div>
+      <div class="role-desc">One-click publish to wiki</div>
+      <div class="role-open">Open — claim it!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LINKS ═══ -->
+<div class="section" id="links">
+  <div class="section-label">✿ Quick Links</div>
+  <div class="section-title">Everything You Need</div>
+  <div class="links-row">
+    <a href="#" class="link-pill"><span class="pill-icon">📖</span> Team Playbook</a>
+    <a href="#" class="link-pill"><span class="pill-icon">🗺️</span> Flow Map</a>
+    <a href="https://klaviyo.slack.com/archives/C0AMW7CVA3Y" class="link-pill"><span class="pill-icon">💬</span> #hackathon-knowledge-transfer-agent</a>
+    <a href="#" class="link-pill"><span class="pill-icon">🐙</span> GitHub Repo</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Made with <span class="footer-heart">♥</span> and too much coffee · March 25, 2026
+</div>
+
+<!-- Scroll-triggered card animations -->
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
+}, { threshold: 0.1 });
+document.querySelectorAll('.role-card, .link-pill').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  obs.observe(el);
+});
+</script>
+
+</body>
+</html>
