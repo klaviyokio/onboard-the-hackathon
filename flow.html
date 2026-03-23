@@ -84,167 +84,196 @@ svg.flow-svg{width:100%;height:auto;display:block;}
 </div>
 
 <div class="canvas-wrap">
-<svg class="flow-svg" viewBox="0 0 1060 780" xmlns="http://www.w3.org/2000/svg">
+<svg class="flow-svg" viewBox="0 0 1200 750" xmlns="http://www.w3.org/2000/svg">
 <defs>
-  <filter id="glow1"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#7eaaa0" flood-opacity="0.35"/></filter>
-  <filter id="glow2"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#9a8bc4" flood-opacity="0.35"/></filter>
-  <filter id="glow3"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#8da67e" flood-opacity="0.35"/></filter>
-  <filter id="glow4"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#c4a050" flood-opacity="0.35"/></filter>
-  <filter id="glow5"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#c48080" flood-opacity="0.35"/></filter>
-  <marker id="a1" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#7eaaa0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <marker id="a2" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#9a8bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <marker id="a3" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#8da67e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <marker id="a4" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#c4a050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <marker id="a5" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#c48080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <marker id="ai" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1L11 6L1 11" fill="none" stroke="#9a8bc4" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>
-  <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.6" fill="#d4c0a8" opacity="0.4"/></pattern>
+  <filter id="rough">
+    <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="glow1"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#7eaaa0" flood-opacity="0.25"/></filter>
+  <filter id="glow2"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#9a8bc4" flood-opacity="0.25"/></filter>
+  <filter id="glow3"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#8da67e" flood-opacity="0.25"/></filter>
+  <filter id="glow4"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#c4a050" flood-opacity="0.25"/></filter>
+  <filter id="glow5"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#c48080" flood-opacity="0.25"/></filter>
+  <marker id="a-teal" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#7eaaa0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="a-mauve" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#9a8bc4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="a-green" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#8da67e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="a-yellow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#c4a050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="a-pink" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="10" markerHeight="10" orient="auto">
+    <path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#c48080" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <pattern id="dots" width="48" height="48" patternUnits="userSpaceOnUse">
+    <circle cx="24" cy="24" r="0.6" fill="#d4c0a8" opacity="0.4"/>
+  </pattern>
 </defs>
 
 <!-- BG -->
-<rect width="1060" height="740" fill="var(--cream)"/>
-<rect width="1060" height="740" fill="url(#dots)"/>
+<rect width="1200" height="750" fill="var(--cream)"/>
+<rect width="1200" height="750" fill="url(#dots)"/>
 
 <!-- Title -->
-<text x="530" y="38" text-anchor="middle" font-family="Caveat" font-size="28" font-weight="700" fill="var(--espresso)" opacity="0.8">How the Knowledge Transfer Agent Works</text>
-<text x="530" y="58" text-anchor="middle" font-family="Quicksand" font-size="11" fill="var(--mocha)" letter-spacing="2" font-weight="600">EMAIL → GLEAN → AI INTERVIEW → SYNTHESIS → CONFLUENCE</text>
+<text x="600" y="42" text-anchor="middle" font-family="Caveat" font-size="32" font-weight="700" fill="var(--espresso)" opacity="0.9">How the Knowledge Transfer Agent Works</text>
+<text x="600" y="64" text-anchor="middle" font-family="Quicksand" font-size="11" fill="var(--mocha)" letter-spacing="2" font-weight="600">ENTER EMAIL → GLEAN LOOKUP → AI INTERVIEW → SYNTHESIS → CONFLUENCE</text>
 
-<!-- ═══ PATHS ═══ -->
-<path id="p12" d="M245,175 C310,175 330,240 395,255" fill="none" stroke="#7eaaa0" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a1)" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
-<circle r="5" fill="#7eaaa0" opacity="0"><animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#p12"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.2s" repeatCount="indefinite"/></circle>
+<!-- Path 1→2 -->
+<path id="p12" d="M 245,190 C 310,190 330,260 395,275" fill="none" stroke="#7eaaa0" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#a-teal)" filter="url(#rough)" opacity="0.7">
+  <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/>
+</path>
+<circle r="5" fill="#7eaaa0" opacity="0">
+  <animateMotion dur="2.2s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.6 1"><mpath href="#p12"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.2s" repeatCount="indefinite"/>
+</circle>
 
-<path id="p23" d="M575,240 C620,225 650,220 680,260 C710,300 720,340 700,380" fill="none" stroke="#9a8bc4" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a2)" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
-<circle r="5" fill="#9a8bc4" opacity="0"><animateMotion dur="2.5s" repeatCount="indefinite"><mpath href="#p23"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.5s" repeatCount="indefinite"/></circle>
+<!-- Path 2→3 -->
+<path id="p23" d="M 575,260 C 620,245 650,240 680,280 C 710,320 720,360 700,400" fill="none" stroke="#9a8bc4" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#a-mauve)" filter="url(#rough)" opacity="0.7">
+  <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/>
+</path>
+<circle r="5" fill="#9a8bc4" opacity="0">
+  <animateMotion dur="2.5s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.6 1"><mpath href="#p23"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.5s" repeatCount="indefinite"/>
+</circle>
 
-<path id="p34" d="M620,490 C590,530 530,550 480,570 C430,590 380,590 340,560" fill="none" stroke="#8da67e" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a3)" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
-<circle r="5" fill="#8da67e" opacity="0"><animateMotion dur="2.8s" repeatCount="indefinite"><mpath href="#p34"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.8s" repeatCount="indefinite"/></circle>
+<!-- Path 3→4 -->
+<path id="p34" d="M 620,510 C 590,550 530,570 480,590 C 430,610 380,610 340,580" fill="none" stroke="#8da67e" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#a-green)" filter="url(#rough)" opacity="0.7">
+  <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/>
+</path>
+<circle r="5" fill="#8da67e" opacity="0">
+  <animateMotion dur="2.8s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.6 1"><mpath href="#p34"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="2.8s" repeatCount="indefinite"/>
+</circle>
 
-<path id="p45" d="M340,580 C420,630 560,650 680,640 C800,630 870,610 920,580" fill="none" stroke="#c4a050" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a4)" opacity="0.6"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
-<circle r="5" fill="#c4a050" opacity="0"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#p45"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="3s" repeatCount="indefinite"/></circle>
+<!-- Path 4→5 -->
+<path id="p45" d="M 340,600 C 420,650 560,670 680,660 C 800,650 870,630 920,600" fill="none" stroke="#c4a050" stroke-width="2.2" stroke-dasharray="8 5" marker-end="url(#a-yellow)" filter="url(#rough)" opacity="0.7">
+  <animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/>
+</path>
+<circle r="5" fill="#c4a050" opacity="0">
+  <animateMotion dur="3s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.6 1"><mpath href="#p45"/></animateMotion>
+  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.88;1" dur="3s" repeatCount="indefinite"/>
+</circle>
 
-<!-- Input paths (dashed) -->
-<path d="M510,120 C500,148 490,185 488,225" fill="none" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ai)" opacity="0.4"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/></path>
-<path d="M400,660 L475,660" fill="none" stroke="#c4a050" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a4)" opacity="0.4"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/></path>
+<!-- Question Tree → Node 2 -->
+<path d="M 510,130 C 500,160 490,200 488,245" fill="none" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a-mauve)" filter="url(#rough)" opacity="0.5">
+  <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+</path>
 
-<!-- Chat bidirectional -->
-<path d="M680,420 C760,420 780,420 860,420" fill="none" stroke="#8da67e" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a3)" opacity="0.5"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1s" repeatCount="indefinite"/></path>
-<path d="M860,440 C780,440 760,440 680,440" fill="none" stroke="#7eaaa0" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.4"><animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.2s" repeatCount="indefinite"/></path>
-<path id="p6" d="M940,465 L940,525" fill="none" stroke="#8da67e" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a3)" opacity="0.5"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
+<!-- Doc Template → Node 4 -->
+<path d="M 160,480 C 175,510 200,540 235,555" fill="none" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a-green)" filter="url(#rough)" opacity="0.5">
+  <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+</path>
 
-<!-- Data labels (hand-written) -->
-<text x="290" y="208" font-family="Caveat" font-size="13" fill="#7eaaa0" opacity="0.7" transform="rotate(-12,290,208)">profile + docs + expertise</text>
-<text x="695" y="292" font-family="Caveat" font-size="13" fill="#9a8bc4" opacity="0.7" transform="rotate(50,695,292)">tailored AI prompt</text>
-<text x="460" y="538" font-family="Caveat" font-size="13" fill="#8da67e" opacity="0.7" transform="rotate(12,460,538)">full transcript</text>
-<text x="640" y="650" font-family="Caveat" font-size="13" fill="#c4a050" opacity="0.7" transform="rotate(-5,640,650)">structured handoff doc</text>
-<text x="770" y="412" font-family="Caveat" font-size="11" fill="#8da67e" opacity="0.6">AI responses →</text>
-<text x="770" y="454" font-family="Caveat" font-size="11" fill="#7eaaa0" opacity="0.6">← user messages</text>
-
-<!-- ═══ NODES ═══ -->
+<!-- Data labels -->
+<text x="290" y="225" font-family="Caveat" font-size="14" fill="#5a8a80" opacity="0.8" transform="rotate(-12, 290, 225)">profile + docs + expertise</text>
+<text x="695" y="310" font-family="Caveat" font-size="14" fill="#7a6ba4" opacity="0.8" transform="rotate(50, 695, 310)">tailored AI prompt</text>
+<text x="460" y="555" font-family="Caveat" font-size="14" fill="#6d865e" opacity="0.8" transform="rotate(12, 460, 555)">full transcript</text>
+<text x="640" y="670" font-family="Caveat" font-size="14" fill="#8a6a20" opacity="0.8" transform="rotate(-5, 640, 670)">structured handoff doc</text>
 
 <!-- Node 1: Email -->
 <g filter="url(#glow1)">
-  <rect x="60" y="100" width="190" height="65" rx="16" fill="var(--white)" stroke="#7eaaa0" stroke-width="2"/>
-  <circle cx="82" cy="114" r="10" fill="rgba(126,170,160,0.12)" stroke="#7eaaa0" stroke-width="1.5"/>
-  <text x="82" y="118" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#7eaaa0">1</text>
-  <text x="160" y="118" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#7eaaa0" letter-spacing="1.5" font-weight="700">GLEAN LOOKUP</text>
-  <text x="155" y="140" text-anchor="middle" font-family="Caveat" font-size="18" font-weight="600" fill="var(--espresso)">📧 Enter your email</text>
-  <text x="155" y="158" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Pulls docs, role, team, expertise</text>
+  <rect x="60" y="110" width="190" height="80" rx="16" fill="var(--white)" stroke="#7eaaa0" stroke-width="2.5" filter="url(#rough)"/>
+  <rect x="60" y="110" width="190" height="26" rx="16" fill="rgba(126,170,160,0.08)"/>
+  <circle cx="82" cy="122" r="11" fill="rgba(126,170,160,0.15)" stroke="#7eaaa0" stroke-width="1.5"/>
+  <text x="82" y="127" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#7eaaa0">1</text>
+  <text x="160" y="127" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#7eaaa0" letter-spacing="1.5" font-weight="700">GLEAN LOOKUP</text>
+  <text x="155" y="153" text-anchor="middle" font-family="Caveat" font-size="19" font-weight="600" fill="var(--espresso)">📧 Enter your email</text>
+  <text x="155" y="176" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Pulls docs, role, team, expertise</text>
 </g>
 
 <!-- Node 2: AI Prep -->
 <g filter="url(#glow2)">
-  <rect x="390" y="215" width="190" height="65" rx="16" fill="var(--white)" stroke="#9a8bc4" stroke-width="2"/>
-  <circle cx="412" cy="229" r="10" fill="rgba(154,139,196,0.12)" stroke="#9a8bc4" stroke-width="1.5"/>
-  <text x="412" y="233" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#9a8bc4">2</text>
-  <text x="495" y="233" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#9a8bc4" letter-spacing="1.5" font-weight="700">AI PREP</text>
-  <text x="485" y="255" text-anchor="middle" font-family="Caveat" font-size="18" font-weight="600" fill="var(--espresso)">🧠 AI gets prepped</text>
-  <text x="485" y="273" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Context + questions → Claude</text>
+  <rect x="390" y="235" width="190" height="80" rx="16" fill="var(--white)" stroke="#9a8bc4" stroke-width="2.5" filter="url(#rough)"/>
+  <rect x="390" y="235" width="190" height="26" rx="16" fill="rgba(154,139,196,0.08)"/>
+  <circle cx="412" cy="247" r="11" fill="rgba(154,139,196,0.15)" stroke="#9a8bc4" stroke-width="1.5"/>
+  <text x="412" y="252" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#9a8bc4">2</text>
+  <text x="495" y="252" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#9a8bc4" letter-spacing="1.5" font-weight="700">AI PREP</text>
+  <text x="485" y="278" text-anchor="middle" font-family="Caveat" font-size="19" font-weight="600" fill="var(--espresso)">🧠 AI gets prepped</text>
+  <text x="485" y="301" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Context + questions → Claude</text>
 </g>
 
-<!-- Question tree input -->
-<rect x="435" y="82" width="155" height="42" rx="12" fill="var(--white)" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="512" y="100" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#9a8bc4">📋 Interview Questions</text>
-<text x="512" y="116" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">8–10 topics + follow-ups</text>
+<!-- Question Tree input -->
+<rect x="435" y="95" width="155" height="45" rx="12" fill="var(--white)" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#rough)"/>
+<text x="512" y="115" text-anchor="middle" font-family="Caveat" font-size="15" font-weight="600" fill="#9a8bc4">📋 Interview Questions</text>
+<text x="512" y="131" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">8–10 topics + follow-ups</text>
 
 <!-- Node 3: Conversation -->
 <g filter="url(#glow3)">
-  <rect x="610" y="375" width="260" height="115" rx="18" fill="var(--white)" stroke="#8da67e" stroke-width="2"/>
-  <circle cx="634" cy="391" r="10" fill="rgba(141,166,126,0.12)" stroke="#8da67e" stroke-width="1.5"/>
-  <text x="634" y="395" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#8da67e">3</text>
-  <text x="750" y="395" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#8da67e" letter-spacing="1.5" font-weight="700">GUIDED INTERVIEW</text>
-  <text x="740" y="420" text-anchor="middle" font-family="Caveat" font-size="19" font-weight="600" fill="var(--espresso)">💬 Conversational Interview</text>
-  <text x="740" y="440" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">10–15 turns, follows up, references docs</text>
+  <rect x="610" y="395" width="260" height="120" rx="18" fill="var(--white)" stroke="#8da67e" stroke-width="2.5" filter="url(#rough)"/>
+  <rect x="610" y="395" width="260" height="28" rx="18" fill="rgba(141,166,126,0.08)"/>
+  <circle cx="634" cy="409" r="11" fill="rgba(141,166,126,0.15)" stroke="#8da67e" stroke-width="1.5"/>
+  <text x="634" y="414" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#8da67e">3</text>
+  <text x="750" y="414" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#8da67e" letter-spacing="1.5" font-weight="700">GUIDED INTERVIEW</text>
+  <text x="740" y="442" text-anchor="middle" font-family="Caveat" font-size="20" font-weight="600" fill="var(--espresso)">💬 Conversational Interview</text>
+  <text x="740" y="463" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">10–15 turns, follows up, references docs</text>
   <!-- Mini chat bubbles -->
-  <rect x="630" y="452" width="120" height="16" rx="8" fill="rgba(141,166,126,0.08)" stroke="rgba(141,166,126,0.2)" stroke-width="1"/>
-  <text x="640" y="464" font-family="Quicksand" font-size="8" fill="#8da67e" font-weight="600">🤖 Which docs are stale?</text>
-  <rect x="760" y="452" width="90" height="16" rx="8" fill="rgba(126,170,160,0.08)" stroke="rgba(126,170,160,0.2)" stroke-width="1"/>
-  <text x="770" y="464" font-family="Quicksand" font-size="8" fill="#7eaaa0" font-weight="600">The 2024 runbook...</text>
+  <rect x="630" y="475" width="120" height="16" rx="8" fill="rgba(141,166,126,0.08)" stroke="rgba(141,166,126,0.2)" stroke-width="1"/>
+  <text x="640" y="487" font-family="Quicksand" font-size="8" fill="#8da67e" font-weight="600">🤖 Which docs are stale?</text>
+  <rect x="760" y="475" width="90" height="16" rx="8" fill="rgba(126,170,160,0.08)" stroke="rgba(126,170,160,0.2)" stroke-width="1"/>
+  <text x="770" y="487" font-family="Quicksand" font-size="8" fill="#7eaaa0" font-weight="600">The 2024 runbook...</text>
   <!-- Progress bar -->
-  <rect x="660" y="475" width="100" height="5" rx="2.5" fill="var(--latte)"/>
-  <rect x="660" y="475" width="75" height="5" rx="2.5" fill="#8da67e" opacity="0.7"><animate attributeName="width" values="30;60;75;75" keyTimes="0;0.3;0.7;1" dur="4s" repeatCount="indefinite"/></rect>
-  <text x="768" y="481" font-family="Quicksand" font-size="8" fill="var(--mocha)" font-weight="600">6/8 topics</text>
+  <rect x="630" y="498" width="110" height="5" rx="2.5" fill="var(--latte)"/>
+  <rect x="630" y="498" width="82" height="5" rx="2.5" fill="#8da67e" opacity="0.7">
+    <animate attributeName="width" values="30;60;82;82" keyTimes="0;0.3;0.7;1" dur="4s" repeatCount="indefinite"/>
+  </rect>
+  <text x="748" y="504" font-family="Quicksand" font-size="7.5" fill="var(--mocha)" font-weight="600">6/8 topics</text>
 </g>
-
-<!-- Transcript -->
-<rect x="860" y="525" width="160" height="45" rx="12" fill="var(--white)" stroke="#8da67e" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="940" y="546" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#8da67e">📝 Full Transcript</text>
-<text x="940" y="562" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">10–15 turns of conversation</text>
 
 <!-- Node 4: Synthesis -->
 <g filter="url(#glow4)">
-  <rect x="160" y="520" width="190" height="65" rx="16" fill="var(--white)" stroke="#c4a050" stroke-width="2"/>
-  <circle cx="182" cy="534" r="10" fill="rgba(196,160,80,0.12)" stroke="#c4a050" stroke-width="1.5"/>
-  <text x="182" y="538" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#c4a050">4</text>
-  <text x="265" y="538" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#c4a050" letter-spacing="1.5" font-weight="700">SYNTHESIS</text>
-  <text x="255" y="560" text-anchor="middle" font-family="Caveat" font-size="18" font-weight="600" fill="var(--espresso)">📄 Handoff doc generated</text>
-  <text x="255" y="578" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Structured: risks, processes, contacts</text>
+  <rect x="160" y="540" width="190" height="80" rx="16" fill="var(--white)" stroke="#c4a050" stroke-width="2.5" filter="url(#rough)"/>
+  <rect x="160" y="540" width="190" height="26" rx="16" fill="rgba(196,160,80,0.08)"/>
+  <circle cx="182" cy="552" r="11" fill="rgba(196,160,80,0.15)" stroke="#c4a050" stroke-width="1.5"/>
+  <text x="182" y="557" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#c4a050">4</text>
+  <text x="265" y="557" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#c4a050" letter-spacing="1.5" font-weight="700">SYNTHESIS</text>
+  <text x="255" y="580" text-anchor="middle" font-family="Caveat" font-size="19" font-weight="600" fill="var(--espresso)">📄 Handoff doc generated</text>
+  <text x="255" y="604" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">Structured: risks, processes, contacts</text>
 </g>
 
-<!-- Doc template input -->
-<rect x="250" y="638" width="155" height="42" rx="12" fill="var(--white)" stroke="#c4a050" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="328" y="656" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#c4a050">📋 Doc Template</text>
-<text x="328" y="672" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">Sections + synthesis prompt</text>
-
-<!-- Transcript output -->
-<rect x="860" y="525" width="160" height="45" rx="12" fill="var(--white)" stroke="#8da67e" stroke-width="1.5" stroke-dasharray="6 3"/>
-<text x="940" y="546" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#8da67e">📝 Full Transcript</text>
-<text x="940" y="562" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">10–15 turns of conversation</text>
-
-<!-- Path: Conversation → Transcript -->
-<path d="M940,465 L940,525" fill="none" stroke="#8da67e" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#a3)" opacity="0.5"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur="1.2s" repeatCount="indefinite"/></path>
+<!-- Doc Template input -->
+<rect x="65" y="440" width="145" height="45" rx="12" fill="var(--white)" stroke="#9a8bc4" stroke-width="1.5" stroke-dasharray="6 3" filter="url(#rough)"/>
+<text x="138" y="460" text-anchor="middle" font-family="Caveat" font-size="15" font-weight="600" fill="#9a8bc4">📋 Doc Template</text>
+<text x="138" y="477" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" font-weight="500">Sections + synthesis prompt</text>
 
 <!-- Node 5: Confluence -->
 <g filter="url(#glow5)">
-  <rect x="870" y="590" width="180" height="80" rx="16" fill="var(--white)" stroke="#c48080" stroke-width="2"/>
-  <circle cx="892" cy="606" r="10" fill="rgba(196,128,128,0.12)" stroke="#c48080" stroke-width="1.5"/>
-  <text x="892" y="610" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#c48080">5</text>
-  <text x="970" y="610" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#c48080" letter-spacing="1.5" font-weight="700">PUBLISHED</text>
-  <text x="960" y="633" text-anchor="middle" font-family="Caveat" font-size="19" font-weight="600" fill="var(--espresso)">🚀 Live on Confluence</text>
-  <text x="960" y="651" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">One click → formatted wiki page</text>
-  <text x="960" y="665" text-anchor="middle" font-family="Caveat" font-size="12" fill="#c48080" opacity="0.7">Done. 15 minutes of their time.</text>
+  <rect x="870" y="555" width="220" height="90" rx="18" fill="var(--white)" stroke="#c48080" stroke-width="2.5" filter="url(#rough)"/>
+  <rect x="870" y="555" width="220" height="28" rx="18" fill="rgba(196,128,128,0.08)"/>
+  <circle cx="894" cy="569" r="11" fill="rgba(196,128,128,0.15)" stroke="#c48080" stroke-width="1.5"/>
+  <text x="894" y="574" text-anchor="middle" font-family="Quicksand" font-size="11" font-weight="700" fill="#c48080">5</text>
+  <text x="990" y="574" text-anchor="middle" font-family="Quicksand" font-size="9" fill="#c48080" letter-spacing="1.5" font-weight="700">PUBLISHED</text>
+  <text x="980" y="600" text-anchor="middle" font-family="Caveat" font-size="20" font-weight="600" fill="var(--espresso)">🚀 Live on Confluence</text>
+  <text x="980" y="620" text-anchor="middle" font-family="Quicksand" font-size="9.5" fill="var(--mocha)" font-weight="500">One click → formatted wiki page</text>
+  <text x="980" y="636" text-anchor="middle" font-family="Caveat" font-size="13" fill="#c48080" opacity="0.7">Done. 15 minutes of their time.</text>
 </g>
 
-<!-- Annotations (hand-written) -->
-<text x="68" y="188" font-family="Caveat" font-size="12" fill="#7eaaa0" opacity="0.55" transform="rotate(-3,68,188)">↑ like pulling your chart</text>
-<text x="72" y="203" font-family="Caveat" font-size="12" fill="#7eaaa0" opacity="0.55" transform="rotate(-3,72,203)">before a doctor's visit</text>
-<text x="395" y="298" font-family="Caveat" font-size="12" fill="#9a8bc4" opacity="0.55" transform="rotate(2,395,298)">↑ like a journalist who</text>
-<text x="399" y="313" font-family="Caveat" font-size="12" fill="#9a8bc4" opacity="0.55" transform="rotate(2,399,313)">did their homework</text>
-<text x="155" y="602" font-family="Caveat" font-size="12" fill="#8a6a20" opacity="0.7" transform="rotate(3,155,602)">↑ not a transcript — a real</text>
-<text x="160" y="617" font-family="Caveat" font-size="12" fill="#8a6a20" opacity="0.7" transform="rotate(3,160,617)">knowledge map with structure</text>
-<text x="920" y="685" font-family="Caveat" font-size="13" fill="#c48080" opacity="0.55" transform="rotate(-2,920,685)">✨ the "ta-da" moment in the demo</text>
+<!-- Annotations -->
+<text x="68" y="215" font-family="Caveat" font-size="13" fill="#5a8a80" opacity="0.7" transform="rotate(-3, 68, 215)">↑ like pulling your chart</text>
+<text x="72" y="232" font-family="Caveat" font-size="13" fill="#5a8a80" opacity="0.7" transform="rotate(-3, 72, 232)">before a doctor's visit</text>
+<text x="395" y="330" font-family="Caveat" font-size="13" fill="#7a6ba4" opacity="0.7" transform="rotate(2, 395, 330)">↑ like a journalist who</text>
+<text x="399" y="347" font-family="Caveat" font-size="13" fill="#7a6ba4" opacity="0.7" transform="rotate(2, 399, 347)">did their homework</text>
+<text x="155" y="638" font-family="Caveat" font-size="13" fill="#8a6a20" opacity="0.7" transform="rotate(3, 155, 638)">↑ not a transcript — a real</text>
+<text x="160" y="655" font-family="Caveat" font-size="13" fill="#8a6a20" opacity="0.7" transform="rotate(3, 160, 655)">knowledge map with structure</text>
+<text x="920" y="660" font-family="Caveat" font-size="14" fill="#a06060" opacity="0.7" transform="rotate(-2, 920, 660)">✨ the "ta-da" moment in the demo</text>
 
 <!-- Bigger play -->
-<rect x="360" y="730" width="340" height="36" rx="12" fill="rgba(196,160,80,0.06)" stroke="#c4a050" stroke-width="1" stroke-dasharray="4 3"/>
-<text x="530" y="746" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#c4a050">💡 Quarterly brain dumps → handoff is 80% done</text>
-<text x="530" y="762" text-anchor="middle" font-family="Caveat" font-size="12" fill="var(--mocha)">before anyone gives notice</text>
+<rect x="460" y="700" width="300" height="36" rx="10" fill="rgba(196,160,80,0.06)" stroke="#c4a050" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="610" y="716" text-anchor="middle" font-family="Caveat" font-size="14" font-weight="600" fill="#8a6a20">💡 Bigger play: quarterly brain dumps →</text>
+<text x="610" y="730" text-anchor="middle" font-family="Caveat" font-size="13" fill="var(--mocha)">handoff is 80% done before anyone leaves</text>
 
 <!-- Role labels -->
-<g opacity="0.4">
-  <text x="155" y="90" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">GLEAN INTEGRATION</text>
-  <text x="512" y="74" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">INTERVIEW DESIGNER</text>
-  <text x="740" y="366" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">CHAT UI + CAPTAIN</text>
-  <text x="328" y="630" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">DOC TEMPLATE</text>
-  <text x="255" y="510" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">SYNTHESIS ENGINE</text>
-  <text x="960" y="583" text-anchor="middle" font-family="Quicksand" font-size="8" fill="var(--mocha)" letter-spacing="1" font-weight="600">CONFLUENCE PUBLISHER</text>
+<g opacity="0.5">
+  <text x="155" y="100" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">GLEAN INTEGRATION</text>
+  <text x="485" y="86" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">INTERVIEW DESIGNER</text>
+  <text x="740" y="386" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">CHAT UI + CAPTAIN</text>
+  <text x="138" y="432" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">DOC TEMPLATE</text>
+  <text x="255" y="532" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">DOC TEMPLATE + SYNTHESIS</text>
+  <text x="980" y="547" text-anchor="middle" font-family="Quicksand" font-size="8.5" fill="var(--mocha)" letter-spacing="1" font-weight="600">CONFLUENCE PUBLISHER</text>
 </g>
 
 <!-- Sparkles -->
