@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Transfer Agent — How It Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06070b;
+  --surface: #0e1018;
+  --surface2: #151720;
+  --surface3: #1c1e2b;
+  --border: #232638;
+  --text: #e6e8f2;
+  --dim: #9295ad;
+  --muted: #4e5170;
+  --step1: #2dd4bf;
+  --step1bg: rgba(45,212,191,0.07);
+  --step1glow: rgba(45,212,191,0.25);
+  --step2: #818cf8;
+  --step2bg: rgba(129,140,248,0.07);
+  --step2glow: rgba(129,140,248,0.25);
+  --step3: #34d399;
+  --step3bg: rgba(52,211,153,0.07);
+  --step3glow: rgba(52,211,153,0.25);
+  --step4: #fbbf24;
+  --step4bg: rgba(251,191,36,0.07);
+  --step4glow: rgba(251,191,36,0.25);
+  --step5: #f472b6;
+  --step5bg: rgba(244,114,182,0.07);
+  --step5glow: rgba(244,114,182,0.25);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Sora',sans-serif;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+
+/* ── HEADER ── */
+.header{
+  text-align:center;padding:72px 24px 24px;
+  position:relative;overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-250px;left:50%;transform:translateX(-50%);
+  width:900px;height:900px;
+  background:radial-gradient(ellipse, rgba(129,140,248,0.12) 0%, rgba(45,212,191,0.06) 40%, transparent 70%);
+  pointer-events:none;
+}
+.header-chip{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;
+  text-transform:uppercase;letter-spacing:3px;color:var(--step2);
+  background:var(--step2bg);border:1px solid rgba(129,140,248,0.15);
+  border-radius:100px;padding:6px 20px;margin-bottom:20px;
+}
+.header h1{
+  font-family:'Fraunces',serif;font-size:clamp(36px,6vw,64px);
+  font-weight:700;letter-spacing:-1.5px;line-height:1.1;
+  max-width:700px;margin:0 auto;
+}
+.header h1 em{font-style:italic;color:var(--step1);}
+.header p{
+  margin-top:16px;font-size:clamp(15px,2vw,18px);
+  color:var(--dim);max-width:520px;margin-left:auto;margin-right:auto;font-weight:300;
+}
+.header-meta{
+  margin-top:28px;display:flex;gap:28px;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
+}
+
+/* ── FLOW CONTAINER ── */
+.flow-section{
+  max-width:780px;margin:60px auto 0;padding:0 24px;
+}
+
+/* ── STEP CARD ── */
+.step{
+  position:relative;
+  padding-left:72px;
+  padding-bottom:20px;
+  opacity:0;transform:translateY(50px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.step.visible{opacity:1;transform:translateY(0);}
+
+/* vertical rail */
+.step::before{
+  content:'';position:absolute;left:27px;top:0;bottom:0;width:2px;
+  background:var(--border);
+}
+.step:last-of-type::before{display:none;} /* no line after last step */
+
+/* animated pulse running down the rail */
+.step::after{
+  content:'';position:absolute;left:23px;top:0;width:10px;height:40px;
+  border-radius:5px;opacity:0;
+}
+.step.visible::after{
+  animation:railPulse 2.5s ease-in-out infinite;
+}
+.step.s1::after{background:linear-gradient(to bottom,transparent,var(--step1),transparent);}
+.step.s2::after{background:linear-gradient(to bottom,transparent,var(--step2),transparent);}
+.step.s3::after{background:linear-gradient(to bottom,transparent,var(--step3),transparent);}
+.step.s4::after{background:linear-gradient(to bottom,transparent,var(--step4),transparent);}
+
+@keyframes railPulse{
+  0%{top:-10%;opacity:0;}
+  15%{opacity:0.8;}
+  85%{opacity:0.8;}
+  100%{top:90%;opacity:0;}
+}
+
+/* step number circle */
+.step-num{
+  position:absolute;left:6px;top:0;
+  width:44px;height:44px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;
+  z-index:2;
+  transition:box-shadow 0.5s ease, transform 0.5s ease;
+}
+.step.visible .step-num{transform:scale(1.05);}
+.s1 .step-num{background:var(--step1bg);color:var(--step1);border:2px solid var(--step1);}
+.s1.visible .step-num{box-shadow:0 0 24px var(--step1glow);}
+.s2 .step-num{background:var(--step2bg);color:var(--step2);border:2px solid var(--step2);}
+.s2.visible .step-num{box-shadow:0 0 24px var(--step2glow);}
+.s3 .step-num{background:var(--step3bg);color:var(--step3);border:2px solid var(--step3);}
+.s3.visible .step-num{box-shadow:0 0 24px var(--step3glow);}
+.s4 .step-num{background:var(--step4bg);color:var(--step4);border:2px solid var(--step4);}
+.s4.visible .step-num{box-shadow:0 0 24px var(--step4glow);}
+.s5 .step-num{background:var(--step5bg);color:var(--step5);border:2px solid var(--step5);}
+.s5.visible .step-num{box-shadow:0 0 24px var(--step5glow);}
+
+/* card */
+.step-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:32px;
+  transition:border-color 0.4s;
+}
+.step.visible .step-card{border-color:var(--surface3);}
+.step-card:hover{border-color:var(--step2);}
+
+.step-card h2{
+  font-family:'Fraunces',serif;font-size:clamp(20px,3vw,26px);
+  font-weight:600;line-height:1.2;margin-bottom:6px;letter-spacing:-0.5px;
+}
+.step-card .step-who{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;
+}
+.s1 .step-who{color:var(--step1);}
+.s2 .step-who{color:var(--step2);}
+.s3 .step-who{color:var(--step3);}
+.s4 .step-who{color:var(--step4);}
+.s5 .step-who{color:var(--step5);}
+
+.step-card p{font-size:15px;color:var(--dim);line-height:1.7;}
+
+/* analogy box */
+.analogy{
+  margin-top:16px;padding:16px 20px;
+  border-radius:12px;background:var(--surface2);
+  font-size:14px;color:var(--dim);line-height:1.65;
+  border-left:3px solid var(--border);
+  transition:border-color 0.4s;
+}
+.s1 .analogy{border-left-color:var(--step1);}
+.s2 .analogy{border-left-color:var(--step2);}
+.s3 .analogy{border-left-color:var(--step3);}
+.s4 .analogy{border-left-color:var(--step4);}
+.s5 .analogy{border-left-color:var(--step5);}
+.analogy strong{color:var(--text);font-weight:500;}
+
+/* data badge — what flows between steps */
+.data-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:14px;padding:6px 14px;
+  border-radius:100px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.5px;
+}
+.s1 .data-badge{background:var(--step1bg);color:var(--step1);border:1px solid rgba(45,212,191,0.15);}
+.s2 .data-badge{background:var(--step2bg);color:var(--step2);border:1px solid rgba(129,140,248,0.15);}
+.s3 .data-badge{background:var(--step3bg);color:var(--step3);border:1px solid rgba(52,211,153,0.15);}
+.s4 .data-badge{background:var(--step4bg);color:var(--step4);border:1px solid rgba(251,191,36,0.15);}
+.s5 .data-badge{background:var(--step5bg);color:var(--step5);border:1px solid rgba(244,114,182,0.15);}
+
+/* connector arrow between steps */
+.connector{
+  position:relative;
+  padding-left:72px;
+  height:48px;
+  display:flex;align-items:center;
+  opacity:0;transition:opacity 0.5s ease 0.2s;
+}
+.connector.visible{opacity:1;}
+.connector .arrow-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+}
+.connector .arrow-label .dot{
+  width:6px;height:6px;border-radius:50%;
+  animation:dotPulse 1.5s ease-in-out infinite;
+}
+@keyframes dotPulse{0%,100%{opacity:0.3;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);}}
+.c1 .arrow-label{color:var(--step1);} .c1 .dot{background:var(--step1);}
+.c2 .arrow-label{color:var(--step2);} .c2 .dot{background:var(--step2);}
+.c3 .arrow-label{color:var(--step3);} .c3 .dot{background:var(--step3);}
+.c4 .arrow-label{color:var(--step4);} .c4 .dot{background:var(--step4);}
+
+/* ── BIGGER PLAY ── */
+.bigger-play{
+  max-width:780px;margin:60px auto 0;padding:0 24px;
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.bigger-play.visible{opacity:1;transform:translateY(0);}
+.bp-card{
+  background:var(--surface);
+  border:1px solid var(--step2);
+  border-radius:20px;padding:36px 40px;
+  position:relative;overflow:hidden;
+}
+.bp-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, var(--step2glow) 0%, transparent 50%);
+  pointer-events:none;
+}
+.bp-card h3{
+  font-family:'Fraunces',serif;font-size:22px;font-weight:600;
+  margin-bottom:10px;position:relative;
+}
+.bp-card p{
+  font-size:15px;color:var(--dim);line-height:1.7;position:relative;
+}
+.bp-card .highlight{color:var(--text);font-weight:500;}
+
+/* ── MINI CHAT ANIMATION ── */
+.chat-demo{
+  margin-top:20px;display:flex;flex-direction:column;gap:10px;
+}
+.chat-bubble{
+  max-width:85%;padding:12px 16px;border-radius:16px;
+  font-size:13px;line-height:1.5;
+  opacity:0;transform:translateY(10px);
+}
+.step.visible .chat-bubble{animation:bubbleIn 0.5s ease forwards;}
+.step.visible .chat-bubble:nth-child(1){animation-delay:0.3s;}
+.step.visible .chat-bubble:nth-child(2){animation-delay:0.8s;}
+.step.visible .chat-bubble:nth-child(3){animation-delay:1.3s;}
+.step.visible .chat-bubble:nth-child(4){animation-delay:1.8s;}
+
+@keyframes bubbleIn{to{opacity:1;transform:translateY(0);}}
+
+.bubble-ai{
+  align-self:flex-start;background:var(--surface2);
+  border:1px solid var(--border);color:var(--dim);
+  border-bottom-left-radius:4px;
+}
+.bubble-user{
+  align-self:flex-end;background:var(--step3bg);
+  border:1px solid rgba(52,211,153,0.15);color:var(--step3);
+  border-bottom-right-radius:4px;
+}
+.bubble-ai .label, .bubble-user .label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:4px;opacity:0.6;
+}
+
+/* progress bar animation */
+.progress-bar{
+  margin-top:16px;height:6px;border-radius:3px;
+  background:var(--surface3);overflow:hidden;
+  position:relative;
+}
+.progress-fill{
+  height:100%;border-radius:3px;background:var(--step3);
+  width:0;transition:width 0.3s ease;
+}
+.step.visible .progress-fill{animation:progressGrow 3s ease 0.5s forwards;}
+@keyframes progressGrow{
+  0%{width:0;}25%{width:25%;}50%{width:50%;}75%{width:62%;}100%{width:75%;}
+}
+.progress-label{
+  margin-top:6px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--muted);text-align:right;
+}
+
+/* ── DOC PREVIEW ANIMATION ── */
+.doc-preview{
+  margin-top:18px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:12px;padding:16px 20px;overflow:hidden;
+}
+.doc-line{
+  height:8px;border-radius:4px;margin-bottom:8px;
+  opacity:0;transform:scaleX(0);transform-origin:left;
+}
+.step.visible .doc-line{animation:lineGrow 0.4s ease forwards;}
+.step.visible .doc-line:nth-child(1){animation-delay:0.4s;background:var(--step4);width:60%;}
+.step.visible .doc-line:nth-child(2){animation-delay:0.6s;background:var(--surface3);width:90%;}
+.step.visible .doc-line:nth-child(3){animation-delay:0.7s;background:var(--surface3);width:75%;}
+.step.visible .doc-line:nth-child(4){animation-delay:0.8s;background:var(--surface3);width:85%;}
+.step.visible .doc-line:nth-child(5){animation-delay:0.95s;background:var(--step4);opacity:0.5;width:45%;}
+.step.visible .doc-line:nth-child(6){animation-delay:1.05s;background:var(--surface3);width:80%;}
+.step.visible .doc-line:nth-child(7){animation-delay:1.15s;background:var(--surface3);width:70%;}
+@keyframes lineGrow{to{opacity:1;transform:scaleX(1);}}
+
+/* ── PUBLISH ANIMATION ── */
+.publish-anim{
+  margin-top:18px;text-align:center;
+}
+.publish-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:12px;
+  background:var(--step5bg);border:2px solid var(--step5);
+  color:var(--step5);font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:600;cursor:default;
+  opacity:0;transform:scale(0.9);
+  transition:all 0.3s ease;
+}
+.step.visible .publish-btn{animation:btnPop 0.5s ease 0.5s forwards;}
+@keyframes btnPop{to{opacity:1;transform:scale(1);}}
+.publish-btn:hover{background:rgba(244,114,182,0.15);}
+
+.publish-result{
+  margin-top:14px;font-family:'JetBrains Mono',monospace;
+  font-size:12px;color:var(--step5);
+  opacity:0;
+}
+.step.visible .publish-result{animation:fadeUp 0.5s ease 1.2s forwards;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+.publish-result{transform:translateY(8px);}
+
+.checkmark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--step5bg);border:1.5px solid var(--step5);
+  font-size:11px;margin-right:6px;
+}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:80px 24px 48px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .step{padding-left:56px;}
+  .step::before{left:21px;}
+  .step::after{left:17px;}
+  .step-num{left:0;width:38px;height:38px;font-size:14px;border-radius:12px;}
+  .step-card{padding:24px 20px;}
+  .connector{padding-left:56px;height:36px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-chip">Knowledge Transfer Agent</div>
+  <h1>How the <em>Agent</em> Works</h1>
+  <p>Five steps from "enter your email" to a published wiki page. Each step maps to something one of us builds on Wednesday.</p>
+  <div class="header-meta">
+    <span>5 Steps</span>
+    <span>~15 Minutes</span>
+    <span>1 Published Doc</span>
+  </div>
+</div>
+
+<!-- ═══ FLOW ═══ -->
+<div class="flow-section">
+
+  <!-- STEP 1 -->
+  <div class="step s1">
+    <div class="step-num">1</div>
+    <div class="step-card">
+      <h2>Someone enters their email</h2>
+      <div class="step-who">Glean Integration</div>
+      <p>The user types in their work email. Behind the scenes, we look up everything they've written — docs, wiki pages, their role and team — using enterprise search (Glean).</p>
+      <div class="analogy">
+        <strong>Think of it like:</strong> A doctor pulling your chart before the appointment. Before we ask a single question, we already know what you've been working on.
+      </div>
+      <div class="data-badge">📧 email → profile, docs, expertise summary</div>
+    </div>
+  </div>
+
+  <div class="connector c1">
+    <div class="arrow-label"><span class="dot"></span> Context gathered — preparing AI</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step s2">
+    <div class="step-num">2</div>
+    <div class="step-card">
+      <h2>The AI gets prepped</h2>
+      <div class="step-who">Captain + Interview Designer</div>
+      <p>All that context plus a structured interview question tree gets fed to Claude. Now the AI knows who you are, what you've worked on, and what to ask.</p>
+      <div class="analogy">
+        <strong>Think of it like:</strong> A journalist who did their homework before the interview. They've read everything you've published — so they skip the obvious and go straight for what <em>isn't</em> written down.
+      </div>
+      <div class="data-badge">🧠 context + questions → tailored AI interviewer</div>
+    </div>
+  </div>
+
+  <div class="connector c2">
+    <div class="arrow-label"><span class="dot"></span> AI ready — starting conversation</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step s3">
+    <div class="step-num">3</div>
+    <div class="step-card">
+      <h2>A guided conversation</h2>
+      <div class="step-who">Chat UI Builder + Captain</div>
+      <p>10–15 turn chat. The AI asks smart questions, references their actual docs, follows up when something interesting comes up. A progress bar tracks coverage.</p>
+
+      <div class="chat-demo">
+        <div class="chat-bubble bubble-ai">
+          <div class="label">AI Interviewer</div>
+          I see you authored 6 docs about the billing pipeline. Which ones are still accurate?
+        </div>
+        <div class="chat-bubble bubble-user">
+          <div class="label">You</div>
+          The runbook from 2024 is completely wrong now. The deploy process changed when we moved to K8s.
+        </div>
+        <div class="chat-bubble bubble-ai">
+          <div class="label">AI Interviewer</div>
+          Walk me through the current deploy process — the one that isn't written down anywhere.
+        </div>
+        <div class="chat-bubble bubble-user">
+          <div class="label">You</div>
+          Sure. First you need to check the feature flags in LaunchDarkly, then...
+        </div>
+      </div>
+
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label">6 / 8 topics covered</div>
+    </div>
+  </div>
+
+  <div class="connector c3">
+    <div class="arrow-label"><span class="dot"></span> Interview complete — synthesizing</div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step s4">
+    <div class="step-num">4</div>
+    <div class="step-card">
+      <h2>A handoff doc is generated</h2>
+      <div class="step-who">Doc Template + Synthesis</div>
+      <p>A separate AI call takes the full transcript and produces a structured handoff document — responsibilities, risks, undocumented processes, contacts, open questions.</p>
+
+      <div class="doc-preview">
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+        <div class="doc-line"></div>
+      </div>
+
+      <div class="analogy">
+        <strong>Not a transcript.</strong> A structured, organized knowledge map — the kind of doc you'd actually want to read if you were taking over someone's role.
+      </div>
+      <div class="data-badge">📝 transcript + template → structured handoff doc</div>
+    </div>
+  </div>
+
+  <div class="connector c4">
+    <div class="arrow-label"><span class="dot"></span> Document ready — publishing</div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step s5">
+    <div class="step-num">5</div>
+    <div class="step-card">
+      <h2>Published to Confluence</h2>
+      <div class="step-who">Confluence Publisher</div>
+      <p>Preview the doc, click "Publish," Confluence page appears. Done. 15 minutes of their time, and their team has a knowledge map forever.</p>
+
+      <div class="publish-anim">
+        <div class="publish-btn">
+          🚀&nbsp; Publish to Confluence
+        </div>
+        <div class="publish-result">
+          <span class="checkmark">✓</span>
+          Published → confluence.company.com/wiki/knowledge-transfer/jane-chen-handoff
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ BIGGER PLAY ═══ -->
+<div class="bigger-play">
+  <div class="bp-card">
+    <h3>💡 The Bigger Play</h3>
+    <p>People don't have to be leaving to use this. <span class="highlight">Quarterly brain dumps build a living knowledge profile over time.</span> When someone does leave, the handoff is already 80% done before anyone gives notice. That's the vision we pitch to judges — not just an exit tool, but an <span class="highlight">ongoing knowledge capture system</span> for the entire org.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Knowledge Transfer Agent &nbsp;·&nbsp; March 25, 2026 &nbsp;·&nbsp; Let's win this
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.step, .connector, .bigger-play').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
