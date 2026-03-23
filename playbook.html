@@ -411,6 +411,15 @@ p strong{color:var(--espresso);font-weight:700;}
 <h3 class="reveal">6. When in doubt, show — don't tell</h3>
 <p class="reveal">Screenshots, error logs, example code, sample outputs, URLs to documentation — anything concrete you can paste or show the AI will outperform a verbal description.</p>
 
+<h3 class="reveal">7. Git is your save button — let Claude handle it</h3>
+<p class="reveal"><strong>You don't need to know git.</strong> You just need to know that it's your undo button. Here's the workflow:</p>
+<p class="reveal">When you start working, tell Claude: <em>"Create a new branch called feature/[your-feature-name] and work in a worktree."</em> This gives you your own isolated workspace where nothing you do can break anyone else's work.</p>
+<p class="reveal">As you build, tell Claude: <em>"Commit this."</em> Every commit is a save point. If something breaks, you can tell Claude <em>"undo that last change"</em> or <em>"go back to the last working version"</em> and it'll handle it.</p>
+<p class="reveal">When you're done, tell Claude: <em>"Create a pull request for this."</em> That packages up your work and sends it to the Captain to wire into the main project. You don't need to know what a pull request is — just that it's how your finished work gets delivered.</p>
+<div class="callout tip reveal">
+  <p><strong>Think of it this way:</strong> Git = save states in a video game. Commits = quicksave. Branches = different save slots. Pull requests = handing your save file to the team lead. Claude handles all the commands — you just tell it when to save and when you're done.</p>
+</div>
+
 <div class="callout info reveal">
   <div class="callout-label blue">TL;DR — The cheat sheet</div>
   <p>1. Plan before you build. Shift+Tab for planning mode.<br>
@@ -418,7 +427,8 @@ p strong{color:var(--espresso);font-weight:700;}
   3. Stuck after 3 tries? Switch models. Keep a debug log.<br>
   4. Use planning mode (Shift+Tab) to break down big tasks for you.<br>
   5. You're the pilot. If something looks off, say so. Fresh conversations are free.<br>
-  6. Show, don't tell. Paste the actual error. Screenshot the actual screen.</p>
+  6. Show, don't tell. Paste the actual error. Screenshot the actual screen.<br>
+  7. Git = your save button. Tell Claude to commit often and create a PR when done.</p>
 </div>
 
 <hr class="divider">
@@ -432,7 +442,7 @@ p strong{color:var(--espresso);font-weight:700;}
   <li>Install Node.js 18+ — <a href="https://nodejs.org" style="color:var(--caramel);">nodejs.org</a> (LTS version)</li>
   <li>Install Claude Code — <code style="background:var(--warm);padding:2px 8px;border-radius:6px;font-size:13px;">npm install -g @anthropic-ai/claude-code</code></li>
   <li>Install the Codex app — <a href="https://developers.openai.com/codex/app" style="color:var(--caramel);">developers.openai.com/codex/app</a></li>
-  <li>Make sure Git works and you can clone a repo</li>
+  <li>Make sure Git works and you can clone a repo <em style="color:var(--mocha);font-size:12px;">(see tip #7 in Working With AI — Claude handles git for you)</em></li>
   <li>Read this playbook</li>
   <li>Reply in Slack with which role you want</li>
 </ul>
