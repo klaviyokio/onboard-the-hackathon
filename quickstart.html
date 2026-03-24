@@ -118,7 +118,7 @@ p strong{color:var(--espresso);font-weight:700;}
 <div class="toc reveal">
   <a href="#before"><span>1.</span> Before Wednesday — Get Access & Install Tools</a>
   <a href="#cursor"><span>2.</span> Getting Started with Cursor</a>
-  <a href="#claude-code"><span>3.</span> Getting Started with Claude Code</a>
+  <a href="#claude-code"><span>3.</span> Getting Started with Claude Code (Optional)</a>
   <a href="#git-concepts"><span>4.</span> Git in Plain English — What It Is & Why We Use It</a>
   <a href="#git-prompts"><span>5.</span> The Git Prompts — When to Use Each One</a>
   <a href="#day-of"><span>6.</span> Day-Of: Your First 15 Minutes</a>
@@ -137,7 +137,7 @@ p strong{color:var(--espresso);font-weight:700;}
 <ul class="checklist reveal">
   <li><strong>Request GitHub access</strong> — Go to <a href="https://klaviyo.freshservice.com/support/catalog/items/146" style="color:var(--caramel);">Freshservice catalog</a>. You need <strong>Member</strong> access (not Enterprise) to the <strong>GitHub-Klaviyo</strong> org. Create a GitHub account with your Klaviyo email first at <a href="https://github.com/join" style="color:var(--caramel);">github.com/join</a> if you don't have one. Should be instant approval.</li>
   <li><strong>Request Cursor access</strong> — Go to <a href="https://klaviyo.freshservice.com/support/catalog/items/523" style="color:var(--caramel);">Freshservice catalog</a> and submit the request. This is instant approval.</li>
-  <li><strong>Request Claude Code access</strong> — You need "Claude Premium" access. If you don't have it, ask in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a> and Kioja will help.</li>
+  <li><strong>(Optional) Request Claude Code access</strong> — You need "Claude Premium" access. This is a bonus tool, not required — Cursor alone is enough. If you want it, ask in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a> and Kioja will help.</li>
   <li><strong>Download and install Cursor</strong> — <a href="https://cursor.com" style="color:var(--caramel);">cursor.com</a> — it's a code editor that has AI built in. Think of it like a Google Doc but for code, where you can talk to an AI assistant while you work.</li>
   <li><strong>Install Node.js and Git</strong> — Don't Google around for this. Just open Cursor's AI chat and paste the prompt below. It'll walk you through everything.</li>
 </ul>
@@ -171,11 +171,13 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 
 <div class="step-card reveal">
   <h3><span class="step-num">3</span> Use the AI chat</h3>
-  <p>Press <strong>Cmd+L</strong> (Mac) or <strong>Ctrl+L</strong> (Windows) to open the AI chat panel. This is where you talk to the AI. Cursor's default AI model works great out of the box — just leave it on "Auto" and start talking. You can:</p>
-  <p>- Ask it to explain code you're looking at<br>
-  - Tell it to build something and it writes the code<br>
-  - Paste errors and ask it to fix them<br>
-  - Highlight code, then ask the AI to modify just that part</p>
+  <p>Press <strong>Cmd+L</strong> (Mac) or <strong>Ctrl+L</strong> (Windows) to open the AI chat panel. This is where you talk to the AI. Make sure it says <strong>"Agent"</strong> and <strong>"Auto"</strong> at the bottom of the chat panel (see the arrow below). That's the mode you want — it lets the AI make changes to your files directly.</p>
+  <img src="cursor-screenshot.png" alt="Cursor with Agent mode and Claude Code in terminal" style="width:100%;border-radius:12px;border:1.5px solid var(--latte);margin:12px 0;">
+  <p>Here's what you're looking at:</p>
+  <p>- <strong>Left panel</strong> — the AI chat. Type what you want here. Agent mode + Auto is set at the bottom.<br>
+  - <strong>Center</strong> — your code files. This is where you see what the AI writes.<br>
+  - <strong>Bottom (Terminal tab)</strong> — Claude Code running in the terminal. A second AI you can talk to for bigger tasks.<br>
+  - <strong>Right sidebar</strong> — your project files and folders.</p>
 </div>
 
 <div class="step-card reveal">
@@ -196,7 +198,11 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 <!-- ═══════════════════════════════════════════ -->
 <!-- SECTION 3: CLAUDE CODE -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="claude-code">3. Getting Started with Claude Code</h2>
+<h2 class="reveal" id="claude-code">3. Getting Started with Claude Code <span style="font-size:14px;font-weight:500;color:var(--mocha);font-family:'Quicksand',sans-serif;">(Optional)</span></h2>
+
+<div class="callout warn reveal">
+  <p><strong>Claude Code is optional.</strong> Cursor's built-in AI (Agent mode) is all you need for the hackathon. Claude Code is a bonus tool for those who got Claude Premium access and want extra power. If you didn't get access or this section feels overwhelming, skip it entirely — you won't be at a disadvantage.</p>
+</div>
 
 <p class="reveal">Claude Code is Anthropic's command-line AI tool. It runs in your terminal (the black window with text). It's powerful because it can read your entire project, make changes across multiple files, and run commands — all from a conversation.</p>
 
