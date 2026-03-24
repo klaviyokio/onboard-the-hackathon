@@ -181,7 +181,32 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 </div>
 
 <div class="step-card reveal">
-  <h3><span class="step-num">4</span> Set up Claude Code in the terminal (if you got access)</h3>
+  <h3><span class="step-num">4</span> Switch modes with Shift+Tab</h3>
+  <p>See the mode label at the bottom-left of the chat panel? It starts on <strong>Agent</strong> (which is what you want most of the time). But you can press <strong>Shift+Tab</strong> to cycle through three other modes that are useful in different situations:</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;">
+    <div style="text-align:center;">
+      <img src="cursor-mode-plan.png" alt="Plan mode" style="width:100%;border-radius:10px;border:1.5px solid var(--latte);">
+    </div>
+    <div style="text-align:center;">
+      <img src="cursor-mode-debug.png" alt="Debug mode" style="width:100%;border-radius:10px;border:1.5px solid var(--latte);">
+    </div>
+    <div style="text-align:center;">
+      <img src="cursor-mode-ask.png" alt="Ask mode" style="width:100%;border-radius:10px;border:1.5px solid var(--latte);">
+    </div>
+  </div>
+
+  <p><strong style="color:var(--honey);">Plan mode</strong> — The AI thinks through your request and lays out a step-by-step plan <em>before</em> writing any code. Use this when you're about to start something big or you want to make sure the AI understands what you want before it goes off building. Great for the beginning of a task.</p>
+  <p><strong style="color:var(--red);">Debug mode</strong> — The AI focuses specifically on finding and fixing bugs. Use this when something is broken — paste the error message and let it investigate. It'll look through your code, find the problem, and fix it.</p>
+  <p><strong style="color:var(--green);">Ask mode</strong> — The AI just answers your question without changing any files. Use this when you want to understand something — "what does this file do?", "how does this work?", "explain this error to me." It won't touch your code, just explain.</p>
+
+  <div class="callout tip reveal">
+    <p><em><strong>The simple version:</strong> Start in Agent mode (the default). If you want the AI to think before building, hit Shift+Tab to switch to Plan. If something's broken, Shift+Tab to Debug. If you just have a question, Shift+Tab to Ask. You can always Shift+Tab back to Agent when you're ready to build again.</em></p>
+  </div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">5</span> Set up Claude Code in the terminal (if you got access)</h3>
   <p>Cursor has a terminal built in at the bottom of the screen. Press <strong>Ctrl+`</strong> (backtick key, above Tab) to toggle it.</p>
   <p>If you got Claude Code access (Claude Premium), you can run it right inside Cursor's terminal. This gives you <strong>two AI tools at once</strong> — Cursor's chat for quick edits and visual stuff, and Claude Code in the terminal for bigger tasks that touch multiple files.</p>
   <p>In the terminal, type:</p>
