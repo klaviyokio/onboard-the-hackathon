@@ -58,9 +58,8 @@ p strong{color:var(--espresso);font-weight:700;}
 .callout-label.amber{color:var(--amber);}
 .callout-label.blue{color:var(--caramel);}
 
-.prompt-box{background:#2d2216;color:#e8d5b8;border-radius:14px;padding:18px 22px;margin:12px 0 20px;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;overflow-x:auto;position:relative;border:1.5px solid #3d3226;}
-.prompt-box::before{content:'PROMPT';position:absolute;top:8px;right:12px;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;color:var(--caramel);letter-spacing:1px;opacity:0.6;}
-.prompt-box .copy-btn{position:absolute;top:6px;right:68px;background:rgba(196,168,130,0.2);border:1px solid rgba(196,168,130,0.3);color:var(--caramel);font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.prompt-box{background:#2d2216;color:#e8d5b8;border-radius:14px;padding:32px 22px 18px;margin:12px 0 20px;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;overflow-x:auto;position:relative;border:1.5px solid #3d3226;}
+.prompt-box .copy-btn{position:absolute;top:8px;right:12px;background:rgba(196,168,130,0.2);border:1px solid rgba(196,168,130,0.3);color:var(--caramel);font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;transition:all 0.2s;z-index:1;}
 .prompt-box .copy-btn:hover{background:rgba(196,168,130,0.35);}
 
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--caramel);color:var(--white);font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:15px;margin-right:10px;flex-shrink:0;}
@@ -458,17 +457,16 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // Copy button functionality
 document.querySelectorAll('.prompt-box').forEach(box => {
+  const originalText = box.textContent.trim();
   const btn = document.createElement('button');
   btn.className = 'copy-btn';
   btn.textContent = 'Copy';
   btn.onclick = () => {
-    const text = box.childNodes[0].textContent.trim();
-    navigator.clipboard.writeText(text).then(() => {
+    navigator.clipboard.writeText(originalText).then(() => {
       btn.textContent = 'Copied!';
       setTimeout(() => btn.textContent = 'Copy', 1500);
     });
   };
-  box.style.position = 'relative';
   box.insertBefore(btn, box.firstChild);
 });
 </script>
