@@ -427,6 +427,46 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
   </p>
 </div>
 
+<hr class="divider">
+
+<!-- AI TIPS -->
+<h2 class="reveal">Working With AI — Tips That'll Save You Hours</h2>
+<p class="reveal">Whether you've been using AI tools for a while or this is your first time, these are the patterns that separate fast, clean results from spinning your wheels.</p>
+
+<h3 class="reveal">1. Always start in planning mode</h3>
+<p class="reveal"><strong>Never jump straight into building.</strong> Hit <strong>Shift+Tab</strong> in Cursor to switch to Plan mode before typing your prompt. In planning mode, the AI thinks through the approach and asks you questions before writing any code. This lets you catch bad assumptions before it writes 200 lines in the wrong direction.</p>
+<div class="callout bad reveal"><p><strong style="color:var(--red);">Bad:</strong> "Build me a chat interface"</p></div>
+<div class="callout good reveal"><p><strong style="color:var(--green);">Good:</strong> Switch to Plan mode first, then: "I need to build a chat interface. What questions do you have about what I want?"</p></div>
+
+<h3 class="reveal">2. Feed it context, not just commands</h3>
+<p class="reveal">AI tools work dramatically better when you give them reference material.</p>
+<p class="reveal">→ <strong>Building something visual?</strong> Search for an example of something similar first. Otherwise the AI will pick a random design direction.</p>
+<p class="reveal">→ <strong>Working with an API or technical system?</strong> Find the official documentation and paste it in. The AI can read docs faster than you can — your job is to find the right docs and hand them over.</p>
+<p class="reveal">→ <strong>Working on content?</strong> Show it examples of good output. "Make it look like this" beats "make it look good" every time.</p>
+<div class="callout tip reveal"><p><em>The golden rule: the AI doesn't know what's in your head. The more context you give it, the less it has to guess. And every guess is a chance for it to go sideways.</em></p></div>
+
+<h3 class="reveal">3. If it's stuck, switch — don't loop</h3>
+<p class="reveal"><strong>Copy and paste the error.</strong> Don't describe it from memory. The exact error message matters.</p>
+<p class="reveal"><strong>The 3-try rule:</strong> If the AI can't solve a problem in 3 attempts, it's stuck in a loop. Switch to a different model or start a fresh conversation. A fresh start with better context often cracks it immediately.</p>
+<div class="callout info reveal"><p><em>Pro move: Keep a debug.md file listing what you've already tried. When you start fresh, hand it the debug log and say "don't retry anything in here."</em></p></div>
+
+<h3 class="reveal">4. Let planning mode break things down for you</h3>
+<p class="reveal">You don't need to know how to decompose a big task into small steps — that's literally what Plan mode does. Hit Shift+Tab, describe what you want at a high level, and the AI will break it into a sequence of steps and ask you questions.</p>
+<p class="reveal">Your job is just to review the plan. Does it make sense? Is it missing something? Tell it to adjust. Once the plan looks right, let it execute step by step.</p>
+
+<h3 class="reveal">5. You're the pilot, not the passenger</h3>
+<p class="reveal">The AI is going to give you stuff. Sometimes it'll be great, sometimes it'll be way off. That's normal. Just read through what it gives you, and if something doesn't look right, tell it. "Hey, that's not what I was going for" or "Try a different approach" is totally fine — it won't be offended.</p>
+<p class="reveal">And if you've been going back and forth for a while and it's not clicking, don't be afraid to just start a fresh conversation. Sometimes a clean slate with better context gets you there in 5 minutes.</p>
+
+<h3 class="reveal">6. When in doubt, show — don't tell</h3>
+<p class="reveal">Screenshots, error logs, example code, sample outputs, URLs to documentation — anything concrete you can paste or drag into the chat will outperform a verbal description.</p>
+
+<h3 class="reveal">7. If the answer feels wrong, tell it to search the web</h3>
+<p class="reveal"><strong>AI models run on training data — and training data gets stale.</strong> If the AI confidently tells you something that doesn't match what you're seeing, or gives you an answer that just feels off, tell it: <em>"Search the web to verify that."</em> Cursor can search the internet when you ask it to.</p>
+<p class="reveal">This is especially important for anything that changes frequently — API docs, library versions, framework syntax, or recent announcements. The AI might be working from information that was accurate 6 months ago but isn't anymore.</p>
+<div class="callout bad reveal"><p><strong style="color:var(--red);">Bad:</strong> Trusting the AI when it says "use <code>api.v2.create()</code>" without checking — that method might have been renamed or removed.</p></div>
+<div class="callout good reveal"><p><strong style="color:var(--green);">Good:</strong> "That doesn't look right. Search the web for the current API docs and verify."</p></div>
+
 </div>
 
 <div class="footer">Made with <span class="footer-heart">♥</span> and too much coffee · March 25, 2026</div>
