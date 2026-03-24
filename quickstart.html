@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Start Guide ☕</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cream:#faf3eb;--warm:#f5ebe0;--latte:#e6d5c3;--caramel:#c4a882;
+  --espresso:#5c4033;--espresso-soft:#7a6252;--mocha:#8b6f5e;
+  --blush:#e8c4b8;--sage:#b5c4a8;--sage-deep:#8da67e;--sage-light:#d4e0cc;
+  --rose:#d4a0a0;--honey:#e8c170;--honey-light:#f0d998;
+  --white:#fffcf8;--cloud:rgba(255,252,248,0.6);
+  --green:#6a9a5b;--amber:#c48a2a;--red:#c45a5a;
+}
+body{background:var(--cream);color:var(--espresso);font-family:'Quicksand',sans-serif;min-height:100vh;overflow-x:hidden;line-height:1.7;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");animation:grain 0.4s steps(1) infinite;}
+@keyframes grain{0%,100%{transform:translate(0,0);}25%{transform:translate(-2px,3px);}50%{transform:translate(3px,-1px);}75%{transform:translate(-1px,2px);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes bobSlow{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+@keyframes heartBeat{0%,100%{transform:scale(1);}15%{transform:scale(1.15);}30%{transform:scale(1);}}
+
+.bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;}
+.blob-1{width:350px;height:350px;background:radial-gradient(circle,rgba(212,160,160,0.08),transparent 70%);top:5%;right:0;animation:bobSlow 12s ease-in-out infinite;}
+.blob-2{width:300px;height:300px;background:radial-gradient(circle,rgba(181,196,168,0.1),transparent 70%);bottom:15%;left:-5%;animation:bobSlow 15s ease-in-out infinite 3s;}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;position:relative;z-index:10;animation:fadeIn 0.6s ease;}
+.brand{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--espresso);display:flex;align-items:center;gap:10px;text-decoration:none;}
+.brand-icon{animation:bobSlow 3s ease-in-out infinite;display:inline-block;}
+.toplinks{display:flex;gap:8px;}
+.toplinks a{text-decoration:none;color:var(--mocha);font-size:13px;font-weight:600;padding:7px 16px;border-radius:20px;transition:all 0.3s;}
+.toplinks a:hover{background:var(--warm);color:var(--espresso);}
+
+.content{max-width:720px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:5;}
+.page-title{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(28px,5vw,40px);font-weight:700;text-align:center;margin-bottom:8px;animation:fadeUp 0.6s ease 0.1s both;}
+.page-sub{text-align:center;font-size:14px;color:var(--mocha);margin-bottom:40px;font-weight:600;animation:fadeUp 0.6s ease 0.2s both;}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+h2{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(20px,3.5vw,26px);font-weight:700;margin:48px 0 12px;padding-top:16px;color:var(--espresso);}
+h3{font-family:'Zen Maru Gothic',sans-serif;font-size:clamp(16px,2.5vw,19px);font-weight:700;margin:28px 0 8px;color:#8b6a4a;}
+p{font-size:15px;color:var(--espresso-soft);margin-bottom:14px;font-weight:500;}
+p strong{color:var(--espresso);font-weight:700;}
+
+.callout{background:var(--white);border:1.5px solid var(--latte);border-radius:16px;padding:20px 24px;margin:16px 0 20px;}
+.callout.warn{border-left:4px solid var(--honey);background:rgba(232,193,112,0.06);}
+.callout.info{border-left:4px solid var(--sage);background:rgba(181,196,168,0.06);}
+.callout.tip{border-left:4px solid var(--blush);background:rgba(232,196,184,0.06);}
+.callout.good{border-left:4px solid var(--green);background:rgba(106,154,91,0.05);}
+.callout p:last-child{margin-bottom:0;}
+.callout-label{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;}
+.callout-label.green{color:var(--green);}
+.callout-label.amber{color:var(--amber);}
+.callout-label.blue{color:var(--caramel);}
+
+.prompt-box{background:#2d2216;color:#e8d5b8;border-radius:14px;padding:18px 22px;margin:12px 0 20px;font-family:'Courier New',monospace;font-size:13px;line-height:1.6;overflow-x:auto;position:relative;border:1.5px solid #3d3226;}
+.prompt-box::before{content:'PROMPT';position:absolute;top:8px;right:12px;font-family:'Quicksand',sans-serif;font-size:10px;font-weight:700;color:var(--caramel);letter-spacing:1px;opacity:0.6;}
+.prompt-box .copy-btn{position:absolute;top:6px;right:68px;background:rgba(196,168,130,0.2);border:1px solid rgba(196,168,130,0.3);color:var(--caramel);font-family:'Quicksand',sans-serif;font-size:11px;font-weight:600;padding:3px 10px;border-radius:8px;cursor:pointer;transition:all 0.2s;}
+.prompt-box .copy-btn:hover{background:rgba(196,168,130,0.35);}
+
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--caramel);color:var(--white);font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:15px;margin-right:10px;flex-shrink:0;}
+
+.step-card{background:var(--white);border:1.5px solid var(--latte);border-radius:20px;padding:24px;margin:16px 0;transition:all 0.3s;}
+.step-card:hover{border-color:var(--caramel);box-shadow:0 6px 24px rgba(92,64,51,0.06);}
+.step-card h3{margin-top:0;display:flex;align-items:center;}
+
+.plain-english{background:rgba(181,196,168,0.12);border-radius:12px;padding:14px 18px;margin:10px 0 16px;font-size:14px;color:var(--espresso-soft);border-left:3px solid var(--sage);}
+.plain-english strong{color:var(--espresso);}
+
+.divider{border:none;border-top:1.5px solid var(--latte);margin:40px 0;}
+
+.checklist{list-style:none;margin:12px 0;}
+.checklist li{font-size:14px;padding:5px 0 5px 26px;position:relative;font-weight:500;color:var(--espresso-soft);}
+.checklist li::before{content:'☐';position:absolute;left:0;font-size:15px;color:var(--caramel);}
+
+.footer{text-align:center;padding:40px 24px 32px;font-size:12px;color:var(--mocha);font-weight:600;position:relative;z-index:5;}
+.footer-heart{display:inline-block;animation:heartBeat 1.5s ease-in-out infinite;color:var(--rose);}
+
+.toc{background:var(--white);border:1.5px solid var(--latte);border-radius:16px;padding:20px 24px;margin:0 0 12px;}
+.toc a{display:block;text-decoration:none;color:var(--espresso-soft);font-size:14px;font-weight:600;padding:4px 0;transition:color 0.2s;}
+.toc a:hover{color:var(--caramel);}
+.toc a span{color:var(--caramel);margin-right:6px;}
+
+@media(max-width:640px){
+  .topbar{padding:14px 18px;flex-direction:column;gap:10px;}
+  .prompt-box{font-size:12px;padding:14px 16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div></div>
+
+<div class="topbar">
+  <a href="index.html" class="brand"><span class="brand-icon">☕</span> KT Agent</a>
+  <div class="toplinks">
+    <a href="index.html">Home</a>
+    <a href="playbook.html">Playbook</a>
+    <a href="flow.html">Flow Map</a>
+    <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" target="_blank">Slack</a>
+  </div>
+</div>
+
+<div class="content">
+
+<div class="page-title">Quick Start Guide</div>
+<div class="page-sub">Everything you need to get up and running Wednesday morning</div>
+
+<div class="callout info reveal">
+  <p><strong>You don't need to know any of these commands.</strong> You just need to know <em>when</em> to ask your AI tool to do them. This guide gives you the exact prompts to paste. The AI handles the technical stuff.</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc reveal">
+  <a href="#before"><span>1.</span> Before Wednesday — Get Access & Install Tools</a>
+  <a href="#cursor"><span>2.</span> Getting Started with Cursor</a>
+  <a href="#claude-code"><span>3.</span> Getting Started with Claude Code</a>
+  <a href="#git-concepts"><span>4.</span> Git in Plain English — What It Is & Why We Use It</a>
+  <a href="#git-prompts"><span>5.</span> The Git Prompts — When to Use Each One</a>
+  <a href="#day-of"><span>6.</span> Day-Of: Your First 15 Minutes</a>
+  <a href="#help"><span>7.</span> When You're Stuck</a>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 1: BEFORE WEDNESDAY -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="before">1. Before Wednesday — Get Access & Install Tools</h2>
+
+<p class="reveal">Do these before you arrive. The less setup we do on Wednesday morning, the more time we have to build.</p>
+
+<ul class="checklist reveal">
+  <li><strong>Request Cursor access</strong> — Go to <a href="https://klaviyo.freshservice.com/support/catalog/items/523" style="color:var(--caramel);">Freshservice catalog</a> and submit the request. This is instant approval.</li>
+  <li><strong>Request Claude Code access</strong> — You need "Claude Premium" access. If you don't have it, ask in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a> and Kioja will help.</li>
+  <li><strong>Download and install Cursor</strong> — <a href="https://cursor.com" style="color:var(--caramel);">cursor.com</a> — it's a code editor that has AI built in. Think of it like a Google Doc but for code, where you can talk to an AI assistant while you work.</li>
+  <li><strong>Install Node.js</strong> — <a href="https://nodejs.org" style="color:var(--caramel);">nodejs.org</a> — grab the LTS (Long Term Support) version. This is the engine that runs our project. Just download, run the installer, click through the defaults.</li>
+  <li><strong>Make sure Git is installed</strong> — Open your Terminal (Mac: search "Terminal" in Spotlight) and type <code style="background:var(--warm);padding:2px 8px;border-radius:6px;font-size:13px;">git --version</code>. If you see a version number, you're good. If not, it will prompt you to install it — say yes.</li>
+</ul>
+
+<div class="callout tip reveal">
+  <p><em>If any of this feels confusing, don't worry. Just install Cursor and Node.js, and we'll sort the rest out Wednesday morning.</em></p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 2: CURSOR -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="cursor">2. Getting Started with Cursor</h2>
+
+<p class="reveal">Cursor is the main tool most of you will use. It looks like a code editor, but the magic is the AI chat panel — you describe what you want in English and it writes the code for you.</p>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">1</span> Open Cursor</h3>
+  <p>Launch Cursor after installing it. It'll look like a code editor with a sidebar on the left showing files and folders.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">2</span> Connect Cursor to Claude</h3>
+  <p>By default Cursor uses its own AI, but we want it to use Claude (which is smarter for our use case). Open the AI chat panel and type:</p>
+  <div class="prompt-box">
+    I want to set Claude as my default AI model in Cursor. Walk me through the settings to switch from the default model to Claude. Show me step by step where to click.
+  </div>
+  <div class="plain-english"><strong>What this does:</strong> Tells Cursor to use Anthropic's Claude model instead of the default. Claude is what powers our entire project, so using it in your editor means everything speaks the same language.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">3</span> Open the project folder</h3>
+  <p>Once Kioja shares the GitHub link Wednesday morning, you'll need to open the project. Go to <strong>File > Open Folder</strong> and navigate to wherever you cloned the project (we'll cover cloning in the next section).</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">4</span> Use the AI chat</h3>
+  <p>Press <strong>Cmd+L</strong> (Mac) or <strong>Ctrl+L</strong> (Windows) to open the AI chat panel. This is where you talk to the AI. You can:</p>
+  <p>- Ask it to explain code you're looking at<br>
+  - Tell it to build something and it writes the code<br>
+  - Paste errors and ask it to fix them<br>
+  - Highlight code, then ask the AI to modify just that part</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">5</span> Use the built-in terminal</h3>
+  <p>Cursor has a terminal built in at the bottom of the screen. Press <strong>Ctrl+`</strong> (backtick key, above Tab) to toggle it. This is where you'll run Claude Code commands if you want to use both tools together.</p>
+</div>
+
+<div class="callout info reveal">
+  <p><strong>The key thing to remember:</strong> Cursor is where you SEE the code and files. The AI chat panel is where you TALK to the AI. You describe what you want, it writes the code, and you can see it appear in the editor. If something looks wrong, just tell it.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 3: CLAUDE CODE -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="claude-code">3. Getting Started with Claude Code</h2>
+
+<p class="reveal">Claude Code is Anthropic's command-line AI tool. It runs in your terminal (the black window with text). It's powerful because it can read your entire project, make changes across multiple files, and run commands — all from a conversation.</p>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">1</span> Install Claude Code</h3>
+  <p>Open Terminal (or the terminal inside Cursor) and paste this:</p>
+  <div class="prompt-box">npm install -g @anthropic-ai/claude-code</div>
+  <div class="plain-english"><strong>What this does:</strong> Downloads and installs Claude Code on your computer so you can use it from any terminal window.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">2</span> Navigate to the project folder</h3>
+  <p>In your terminal, navigate to where you cloned the project. If you're not sure where it is, paste this prompt into Claude Code:</p>
+  <div class="prompt-box">Help me find and navigate to the hackathon project folder on my computer. It should be a folder called something like "knowledge-transfer" that I cloned from GitHub.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">3</span> Start Claude Code</h3>
+  <p>Once you're in the project folder, just type:</p>
+  <div class="prompt-box">claude</div>
+  <div class="plain-english"><strong>What this does:</strong> Launches the Claude Code AI assistant. It reads your entire project and is ready for you to tell it what to build. You type in English, it writes code.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">4</span> Planning mode</h3>
+  <p>Before you ask Claude Code to build anything, hit <strong>Shift+Tab</strong> to enter planning mode. This makes the AI think through the approach and ask you questions before writing any code. It prevents the AI from going in the wrong direction.</p>
+</div>
+
+<div class="callout tip reveal">
+  <p><em>You can use Cursor and Claude Code together. Use Cursor to SEE your files visually and make quick edits via the chat panel. Use Claude Code in the Cursor terminal for bigger tasks where you want the AI to work across multiple files at once.</em></p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 4: GIT IN PLAIN ENGLISH -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="git-concepts">4. Git in Plain English</h2>
+
+<p class="reveal"><strong>You do not need to learn Git.</strong> You just need to understand 5 concepts so you know <em>when</em> to ask the AI to do something. Here they are:</p>
+
+<div class="step-card reveal">
+  <h3>Clone = Download the project</h3>
+  <div class="plain-english">When Kioja shares the GitHub link, you need to download the project to your computer. That's called "cloning." You do this once, at the very beginning. After that, the project lives on your machine and you work on it locally.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>Branch = Your own workspace</h3>
+  <div class="plain-english">Think of the project like a shared Google Doc. A <strong>branch</strong> is your own private copy where you can make changes without affecting anyone else's work. Everyone works on their own branch. When you're done, your changes get merged back into the main version. This is how 7 people work on the same project without stepping on each other.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>Commit = Save your progress</h3>
+  <div class="plain-english">A <strong>commit</strong> is like hitting Ctrl+S, but smarter — it saves a snapshot of your work with a note about what you changed. If something breaks later, you can go back to any previous commit. Think of it as save points in a video game. Commit early, commit often.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>Push = Upload your saves to the cloud</h3>
+  <div class="plain-english">Your commits live on your computer until you <strong>push</strong> them. Pushing uploads your saved work to GitHub (the cloud) so the team can see it and Kioja can wire it into the main project. If your laptop dies, your pushed work is safe.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>Pull Request (PR) = "Hey, my work is ready"</h3>
+  <div class="plain-english">When you're done with your piece, a <strong>pull request</strong> is how you say "I'm finished, please add my work to the main project." It packages up everything you did on your branch and sends it to Kioja to review and merge. You don't need to know how to create one — just tell the AI.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 5: GIT PROMPTS -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="git-prompts">5. The Git Prompts</h2>
+
+<p class="reveal">Here are the exact prompts to paste into Cursor's AI chat or Claude Code. You don't need to memorize any commands. Just know <em>when</em> to use each prompt.</p>
+
+<div class="callout warn reveal">
+  <div class="callout-label amber">Important</div>
+  <p>These prompts work in both Cursor's AI chat panel (Cmd+L) and in Claude Code (the terminal). Pick whichever you're more comfortable with.</p>
+</div>
+
+<!-- CLONE -->
+<h3 class="reveal">When: Wednesday morning, first thing</h3>
+<p class="reveal"><strong>What you're doing:</strong> Downloading the project to your computer for the first time.</p>
+<div class="prompt-box reveal">
+Clone the hackathon project from GitHub. The repo URL is [Kioja will share this]. Put it somewhere sensible on my computer like my Documents or Desktop folder. Then open it.
+</div>
+<div class="callout tip reveal">
+  <p><em>Kioja will share the exact GitHub URL in Slack Wednesday morning. Just paste it where it says [Kioja will share this].</em></p>
+</div>
+
+<!-- BRANCH -->
+<h3 class="reveal">When: Right after cloning, before you start building</h3>
+<p class="reveal"><strong>What you're doing:</strong> Creating your own private workspace so your changes don't affect anyone else.</p>
+<div class="prompt-box reveal">
+Create a new branch for my work. I'm working on [YOUR ROLE — e.g., "the chat UI", "the interview questions", "the landing page"]. Name the branch something like feature/[short-description]. Switch me to that branch so I'm working on it.
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> Without a branch, everyone would be editing the same files at the same time and overwriting each other's work. Your branch is your safe space. Break things, experiment, try stuff — it only affects your branch.</div>
+
+<!-- COMMIT -->
+<h3 class="reveal">When: Every 30-60 minutes, or whenever something is working</h3>
+<p class="reveal"><strong>What you're doing:</strong> Saving a snapshot of your progress. Do this often — especially when something works.</p>
+<div class="prompt-box reveal">
+Commit my current changes. Here's what I did: [describe briefly — e.g., "got the chat bubbles working", "finished the question tree for topics 1-4", "added the progress bar"]
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> If you break something in the next hour, you can always go back to this save point. The more often you commit, the less work you lose if something goes wrong. Think of it as quicksave.</div>
+
+<div class="callout info reveal">
+  <p><strong>Rule of thumb:</strong> If you just got something working and you think "nice, that works" — that's the moment to commit. Don't wait until everything is done.</p>
+</div>
+
+<!-- PUSH -->
+<h3 class="reveal">When: After a few commits, or before you take a break</h3>
+<p class="reveal"><strong>What you're doing:</strong> Uploading your saved work to the cloud (GitHub) so the team can see it and it's backed up.</p>
+<div class="prompt-box reveal">
+Push my branch to GitHub so the team can see my work.
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> Until you push, your work only exists on your laptop. Pushing backs it up to GitHub and lets Kioja see your progress. Push at least once an hour, and always before stepping away from your computer.</div>
+
+<!-- PULL -->
+<h3 class="reveal">When: If Kioja says "I pushed updates" or "pull the latest"</h3>
+<p class="reveal"><strong>What you're doing:</strong> Downloading the latest changes that Kioja or someone else made to the main project.</p>
+<div class="prompt-box reveal">
+Pull the latest changes from the main branch and merge them into my branch. If there are any conflicts, help me resolve them.
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> As Kioja wires everyone's pieces together, the main project evolves. Pulling keeps your branch up to date so you're building on the latest version, not an outdated one.</div>
+
+<!-- UNDO -->
+<h3 class="reveal">When: Something broke and you want to go back</h3>
+<p class="reveal"><strong>What you're doing:</strong> Going back to the last working version.</p>
+<div class="prompt-box reveal">
+Something broke. Undo my last changes and go back to the last working version. Show me what changed so I can figure out what went wrong.
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> This is your undo button. Because you committed often (right?), the AI can take you back to any save point. No work is permanently lost.</div>
+
+<!-- PR -->
+<h3 class="reveal">When: You're done with your piece and it's ready for Kioja</h3>
+<p class="reveal"><strong>What you're doing:</strong> Packaging up your finished work and sending it to Kioja to add to the main project.</p>
+<div class="prompt-box reveal">
+I'm done with my work on [YOUR ROLE]. Create a pull request to merge my branch into main. Describe what I built and what it does.
+</div>
+<div class="plain-english reveal"><strong>Why this matters:</strong> This is how your finished work gets delivered. Kioja reviews it, and once it looks good, it gets merged into the main project. You don't need to know the mechanics — the AI handles all of it.</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 6: DAY-OF -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="day-of">6. Day-Of: Your First 15 Minutes</h2>
+
+<p class="reveal">Here's exactly what to do when you sit down Wednesday morning after the team brief.</p>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">1</span> Open Cursor</h3>
+  <p>Launch Cursor on your machine.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">2</span> Clone the project</h3>
+  <p>Open the terminal in Cursor (press <strong>Ctrl+`</strong>) and paste the clone prompt from section 5 above with the GitHub link Kioja shares.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">3</span> Open the project folder in Cursor</h3>
+  <p>Go to <strong>File > Open Folder</strong> and select the folder you just cloned.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">4</span> Create your branch</h3>
+  <p>In the AI chat (Cmd+L) or terminal, paste the branch prompt from section 5 with your role name.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">5</span> Find your folder</h3>
+  <p>In the file sidebar on the left, look for your role's folder. Kioja will have set up the directory structure so everyone has their own space:</p>
+  <p style="font-family:monospace;font-size:13px;color:var(--mocha);">
+  Interview Designer &rarr; <code>/content/interview/</code><br>
+  Doc Template &rarr; <code>/content/templates/</code> and <code>/features/synthesis/</code><br>
+  Landing Page &rarr; <code>/app/(marketing)/</code><br>
+  Chat UI &rarr; <code>/features/chat/</code><br>
+  Glean Integration &rarr; <code>/features/glean/</code><br>
+  Confluence Publisher &rarr; <code>/features/confluence/</code>
+  </p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">6</span> Start building</h3>
+  <p>Open the AI chat and start describing what you want. Look at your role card in the <a href="playbook.html" style="color:var(--caramel);">Playbook</a> for the "START HERE" section — that's your first task.</p>
+</div>
+
+<div class="callout good reveal">
+  <p><strong>That's it. You're up and running.</strong> From here, just follow your role card in the playbook. Remember to commit every 30-60 minutes and push before breaks.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 7: HELP -->
+<!-- ═══════════════════════════════════════════ -->
+<h2 class="reveal" id="help">7. When You're Stuck</h2>
+
+<div class="step-card reveal">
+  <h3>Something broke and you don't know why</h3>
+  <div class="prompt-box">I'm getting this error: [paste the exact error]. What's wrong and how do I fix it?</div>
+  <p>Copy and paste the <em>exact</em> error message. Don't describe it from memory — the specific text matters.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3>You don't understand what the AI did</h3>
+  <div class="prompt-box">Explain what you just did in plain English. I'm not a developer — tell me what each file does and why you made those changes.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>The AI seems to be going in circles</h3>
+  <div class="prompt-box">Stop. You've tried this approach 3 times and it's not working. Try a completely different approach to solve this. Search the web to verify your assumptions.</div>
+  <p>If the AI can't fix something in 3 tries, it's stuck in a loop. See <a href="playbook.html" style="color:var(--caramel);">tip #3 in the playbook</a>.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3>You want to see what the app looks like</h3>
+  <div class="prompt-box">How do I run this project locally so I can see it in my browser?</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>You want to install a package the AI told you about</h3>
+  <div class="prompt-box">Install [package name] and add it to the project. Show me how to use it for [what you need].</div>
+</div>
+
+<div class="step-card reveal">
+  <h3>You've been stuck for more than 15 minutes</h3>
+  <p>Post in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a>. Seriously. There are no dumb questions, and someone on the team has probably hit the same thing. Kioja can usually unblock you in 5 minutes.</p>
+</div>
+
+<div class="callout info reveal">
+  <div class="callout-label blue">The cheat sheet</div>
+  <p>
+  <strong>Clone</strong> = Download the project (once, at the start)<br>
+  <strong>Branch</strong> = Create your own workspace (once, after cloning)<br>
+  <strong>Commit</strong> = Save your progress (every 30-60 min)<br>
+  <strong>Push</strong> = Upload saves to GitHub (every hour, before breaks)<br>
+  <strong>Pull</strong> = Get latest updates from the team (when Kioja says to)<br>
+  <strong>PR</strong> = "I'm done, here's my work" (once, when finished)<br>
+  <strong>Undo</strong> = Go back to the last save point (when things break)
+  </p>
+</div>
+
+</div>
+
+<div class="footer">Made with <span class="footer-heart">♥</span> and too much coffee · March 25, 2026</div>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Copy button functionality
+document.querySelectorAll('.prompt-box').forEach(box => {
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = () => {
+    const text = box.childNodes[0].textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1500);
+    });
+  };
+  box.style.position = 'relative';
+  box.insertBefore(btn, box.firstChild);
+});
+</script>
+</body>
+</html>
