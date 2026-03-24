@@ -115,51 +115,77 @@ p strong{color:var(--espresso);font-weight:700;}
   <p>You don't need to be technical. You don't need to know how to code. The whole point is that AI bridges that gap now. This guide is designed so that the only things you do manually are request access and understand what you're looking at — every technical step is handled by your AI coding agent. I want y'all to have that Tony Stark / JARVIS experience — or at least 50% of the way there by the time we're done. If something feels unfamiliar or intimidating, that's exactly where the learning happens. Lean into it.</p>
 </div>
 
-<div class="callout info reveal">
-  <p><strong>You don't need to know any of these commands.</strong> You just need to know <em>when</em> to ask your AI tool to do them. This guide gives you the exact prompts to paste. The AI handles the technical stuff.</p>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-<div class="toc reveal">
-  <a href="#before"><span>1.</span> Get Access & Install Tools</a>
-  <a href="#cursor"><span>2.</span> Getting Started with Cursor</a>
-  <a href="#claude-code"><span>3.</span> Getting Started with Claude Code (Optional)</a>
-  <a href="#git-concepts"><span>4.</span> Git in Plain English — What It Is, When to Prompt</a>
-  <a href="#day-of"><span>5.</span> Day-Of: Your First 15 Minutes</a>
-  <a href="#help"><span>6.</span> When You're Stuck</a>
-</div>
-
 <hr class="divider">
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 1: BEFORE WEDNESDAY -->
+<!-- DO THIS NOW -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="before">1. Get Access & Install Tools</h2>
+<h2 class="reveal" id="now">Do This Now</h2>
 
-<p class="reveal">Get these done now so we can hit the ground running.</p>
+<p class="reveal"><strong>These are the only things you need to do manually.</strong> Everything else in this guide is handled by your AI agent.</p>
 
 <ul class="checklist reveal">
-  <li><strong>Request GitHub access</strong> — Go to <a href="https://klaviyo.freshservice.com/support/catalog/items/146" style="color:var(--caramel);">Freshservice catalog</a>. You need <strong>Member</strong> access (not Enterprise) to the <strong>GitHub-Klaviyo</strong> org. Create a GitHub account with your Klaviyo email first at <a href="https://github.com/join" style="color:var(--caramel);">github.com/join</a> if you don't have one. Should be instant approval.</li>
-  <li><strong>Request Cursor access</strong> — Go to <a href="https://klaviyo.freshservice.com/support/catalog/items/523" style="color:var(--caramel);">Freshservice catalog</a> and submit the request. This is instant approval.</li>
-  <li><strong>(Optional) Request Claude Code access</strong> — You need "Claude Premium" access. This is a bonus tool, not required — Cursor alone is enough. If you want it, ask in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a> and Kioja will help.</li>
-  <li><strong>Download and install Cursor</strong> — <a href="https://cursor.com" style="color:var(--caramel);">cursor.com</a> — it's a code editor that has AI built in. Think of it like a Google Doc but for code, where you can talk to an AI assistant while you work.</li>
-  <li><strong>Install Node.js and Git</strong> — Don't Google around for this. Just open Cursor's AI chat and paste the prompt below. It'll walk you through everything.</li>
+  <li><strong>Request GitHub access</strong> — <a href="https://klaviyo.freshservice.com/support/catalog/items/146" style="color:var(--caramel);">Freshservice catalog</a>. Select <strong>Member</strong> access to <strong>GitHub-Klaviyo</strong> org. Create a GitHub account with your Klaviyo email first at <a href="https://github.com/join" style="color:var(--caramel);">github.com/join</a> if you don't have one.</li>
+  <li><strong>Request Cursor access</strong> — <a href="https://klaviyo.freshservice.com/support/catalog/items/523" style="color:var(--caramel);">Freshservice catalog</a>. Instant approval.</li>
+  <li><strong>Download and install Cursor</strong> — <a href="https://cursor.com" style="color:var(--caramel);">cursor.com</a></li>
+  <li><strong>(Optional) Request Claude Code access</strong> — Ask in <a href="https://klaviyo.enterprise.slack.com/archives/C0AMW7CVA3Y" style="color:var(--caramel);">#hackathon-knowledge-transfer-agent</a>. Cursor alone is enough.</li>
 </ul>
 
-<div class="prompt-box reveal">
-I need to get my computer set up for a Next.js hackathon project. Check if I have Node.js (version 18 or higher) and Git installed. If anything is missing, walk me through installing it step by step. I'm on a Mac.
+<h2 class="reveal" id="day-of">Your First 15 Minutes</h2>
+
+<p class="reveal">Here's exactly what to do when you sit down Wednesday morning after the team brief.</p>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">1</span> Open Cursor</h3>
+  <p>Launch Cursor. Press <strong>Cmd+L</strong> to open the AI chat panel. Make sure it says <strong>"Agent"</strong> and <strong>"Auto"</strong> at the bottom.</p>
+  <img src="cursor-screenshot.png" alt="Cursor with Agent mode" style="width:100%;border-radius:12px;border:1.5px solid var(--latte);margin:12px 0;">
 </div>
 
-<div class="callout tip reveal">
-  <p><em>If any of this feels confusing, don't worry. Just install Cursor, and we'll sort the rest out Wednesday morning.</em></p>
+<div class="step-card reveal">
+  <h3><span class="step-num">2</span> Install dependencies</h3>
+  <p>Paste this into the AI chat:</p>
+  <div class="prompt-box">I need to get my computer set up for a Next.js hackathon project. Check if I have Node.js (version 18 or higher) and Git installed. If anything is missing, walk me through installing it step by step. I'm on a Mac.</div>
 </div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">3</span> Clone the project</h3>
+  <div class="prompt-box">Clone the hackathon project from GitHub. The repo URL is [Kioja will share this]. Put it somewhere sensible on my computer like my Documents or Desktop folder. Then open it.</div>
+  <div class="callout tip"><p><em>Kioja will share the exact GitHub URL in Slack Wednesday morning. Just paste it where it says [Kioja will share this].</em></p></div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">4</span> Open the project in Cursor</h3>
+  <p>Go to <strong>File > Open Folder</strong> and select the folder you just cloned.</p>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">5</span> Create your branch</h3>
+  <div class="prompt-box">Create a new branch for my work. I'm working on [YOUR ROLE — e.g., "the chat UI", "the interview questions", "the landing page"]. Name the branch something like feature/[short-description]. Switch me to that branch so I'm working on it.</div>
+</div>
+
+<div class="step-card reveal">
+  <h3><span class="step-num">6</span> Start building</h3>
+  <p>Open the AI chat and start describing what you want. Look at your role card in the <a href="playbook.html" style="color:var(--caramel);">Playbook</a> for the "START HERE" section — that's your first task. Tell the AI to commit after each change and push before breaks.</p>
+</div>
+
+<div class="callout good reveal">
+  <p><strong>That's it. You're up and running.</strong> Scroll down for details on Cursor, Git, and troubleshooting prompts — but you don't need to read them all now. Come back when you need them.</p>
+</div>
+
+<p class="reveal" style="text-align:center;font-size:13px;color:var(--mocha);margin-top:24px;">
+  <a href="#cursor" style="color:var(--caramel);font-weight:600;">Cursor details</a> ·
+  <a href="#claude-code" style="color:var(--caramel);font-weight:600;">Claude Code (optional)</a> ·
+  <a href="#git-concepts" style="color:var(--caramel);font-weight:600;">Git reference</a> ·
+  <a href="#help" style="color:var(--caramel);font-weight:600;">Troubleshooting</a> ·
+  <a href="playbook.html" style="color:var(--caramel);font-weight:600;">AI tips (in playbook)</a>
+</p>
 
 <hr class="divider">
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 2: CURSOR -->
+<!-- REFERENCE: CURSOR -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="cursor">2. Getting Started with Cursor</h2>
+<h2 class="reveal" id="cursor">Getting Started with Cursor</h2>
 
 <p class="reveal">Cursor is the main tool most of you will use. It looks like a code editor, but the magic is the AI chat panel — you describe what you want in English and it writes the code for you.</p>
 
@@ -227,7 +253,7 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 <!-- ═══════════════════════════════════════════ -->
 <!-- SECTION 3: CLAUDE CODE -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="claude-code">3. Getting Started with Claude Code <span style="font-size:14px;font-weight:500;color:var(--mocha);font-family:'Quicksand',sans-serif;">(Optional)</span></h2>
+<h2 class="reveal" id="claude-code">Getting Started with Claude Code <span style="font-size:14px;font-weight:500;color:var(--mocha);font-family:'Quicksand',sans-serif;">(Optional)</span></h2>
 
 <div class="callout warn reveal">
   <p><strong>Claude Code is optional.</strong> Cursor's built-in AI (Agent mode) is all you need for the hackathon. Claude Code is a bonus tool for those who got Claude Premium access and want extra power. If you didn't get access or this section feels overwhelming, skip it entirely — you won't be at a disadvantage.</p>
@@ -269,7 +295,7 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 <!-- ═══════════════════════════════════════════ -->
 <!-- SECTION 4: GIT IN PLAIN ENGLISH -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="git-concepts">4. Git in Plain English — What It Is, When to Prompt</h2>
+<h2 class="reveal" id="git-concepts">Git in Plain English — What It Is, When to Prompt</h2>
 
 <p class="reveal"><strong>You do not need to learn Git.</strong> You just need to understand 5 concepts so you know <em>when</em> to ask the AI to do something. Here they are:</p>
 
@@ -327,60 +353,9 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
 <hr class="divider">
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 5: DAY-OF -->
+<!-- HELP -->
 <!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="day-of">5. Day-Of: Your First 15 Minutes</h2>
-
-<p class="reveal">Here's exactly what to do when you sit down Wednesday morning after the team brief.</p>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">1</span> Open Cursor</h3>
-  <p>Launch Cursor on your machine.</p>
-</div>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">2</span> Clone the project</h3>
-  <p>Open the terminal in Cursor (press <strong>Cmd+`</strong>) and paste the clone prompt from section 4 above with the GitHub link Kioja shares.</p>
-</div>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">3</span> Open the project folder in Cursor</h3>
-  <p>Go to <strong>File > Open Folder</strong> and select the folder you just cloned.</p>
-</div>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">4</span> Create your branch</h3>
-  <p>In the AI chat (Cmd+L) or terminal, paste the branch prompt from section 4 with your role name.</p>
-</div>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">5</span> Find your folder</h3>
-  <p>In the file sidebar on the left, look for your role's folder. Kioja will have set up the directory structure so everyone has their own space:</p>
-  <p style="font-family:monospace;font-size:13px;color:var(--mocha);">
-  Interview Designer &rarr; <code>/content/interview/</code><br>
-  Doc Template &rarr; <code>/content/templates/</code> and <code>/features/synthesis/</code><br>
-  Landing Page &rarr; <code>/app/(marketing)/</code><br>
-  Chat UI &rarr; <code>/features/chat/</code><br>
-  Glean Integration &rarr; <code>/features/glean/</code><br>
-  Confluence Publisher &rarr; <code>/features/confluence/</code>
-  </p>
-</div>
-
-<div class="step-card reveal">
-  <h3><span class="step-num">6</span> Start building</h3>
-  <p>Open the AI chat and start describing what you want. Look at your role card in the <a href="playbook.html" style="color:var(--caramel);">Playbook</a> for the "START HERE" section — that's your first task.</p>
-</div>
-
-<div class="callout good reveal">
-  <p><strong>That's it. You're up and running.</strong> From here, just follow your role card in the playbook. Tell the AI to commit after each change and push before breaks.</p>
-</div>
-
-<hr class="divider">
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 6: HELP -->
-<!-- ═══════════════════════════════════════════ -->
-<h2 class="reveal" id="help">6. When You're Stuck</h2>
+<h2 class="reveal" id="help">When You're Stuck</h2>
 
 <div class="step-card reveal">
   <h3>Something broke and you don't know why</h3>
@@ -426,46 +401,6 @@ I need to get my computer set up for a Next.js hackathon project. Check if I hav
   <strong>Undo</strong> = Go back to the last save point (when things break)
   </p>
 </div>
-
-<hr class="divider">
-
-<!-- AI TIPS -->
-<h2 class="reveal">Working With AI — Tips That'll Save You Hours</h2>
-<p class="reveal">Whether you've been using AI tools for a while or this is your first time, these are the patterns that separate fast, clean results from spinning your wheels.</p>
-
-<h3 class="reveal">1. Always start in planning mode</h3>
-<p class="reveal"><strong>Never jump straight into building.</strong> Hit <strong>Shift+Tab</strong> in Cursor to switch to Plan mode before typing your prompt. In planning mode, the AI thinks through the approach and asks you questions before writing any code. This lets you catch bad assumptions before it writes 200 lines in the wrong direction.</p>
-<div class="callout bad reveal"><p><strong style="color:var(--red);">Bad:</strong> "Build me a chat interface"</p></div>
-<div class="callout good reveal"><p><strong style="color:var(--green);">Good:</strong> Switch to Plan mode first, then: "I need to build a chat interface. What questions do you have about what I want?"</p></div>
-
-<h3 class="reveal">2. Feed it context, not just commands</h3>
-<p class="reveal">AI tools work dramatically better when you give them reference material.</p>
-<p class="reveal">→ <strong>Building something visual?</strong> Search for an example of something similar first. Otherwise the AI will pick a random design direction.</p>
-<p class="reveal">→ <strong>Working with an API or technical system?</strong> Find the official documentation and paste it in. The AI can read docs faster than you can — your job is to find the right docs and hand them over.</p>
-<p class="reveal">→ <strong>Working on content?</strong> Show it examples of good output. "Make it look like this" beats "make it look good" every time.</p>
-<div class="callout tip reveal"><p><em>The golden rule: the AI doesn't know what's in your head. The more context you give it, the less it has to guess. And every guess is a chance for it to go sideways.</em></p></div>
-
-<h3 class="reveal">3. If it's stuck, switch — don't loop</h3>
-<p class="reveal"><strong>Copy and paste the error.</strong> Don't describe it from memory. The exact error message matters.</p>
-<p class="reveal"><strong>The 3-try rule:</strong> If the AI can't solve a problem in 3 attempts, it's stuck in a loop. Switch to a different model or start a fresh conversation. A fresh start with better context often cracks it immediately.</p>
-<div class="callout info reveal"><p><em>Pro move: Keep a debug.md file listing what you've already tried. When you start fresh, hand it the debug log and say "don't retry anything in here."</em></p></div>
-
-<h3 class="reveal">4. Let planning mode break things down for you</h3>
-<p class="reveal">You don't need to know how to decompose a big task into small steps — that's literally what Plan mode does. Hit Shift+Tab, describe what you want at a high level, and the AI will break it into a sequence of steps and ask you questions.</p>
-<p class="reveal">Your job is just to review the plan. Does it make sense? Is it missing something? Tell it to adjust. Once the plan looks right, let it execute step by step.</p>
-
-<h3 class="reveal">5. You're the pilot, not the passenger</h3>
-<p class="reveal">The AI is going to give you stuff. Sometimes it'll be great, sometimes it'll be way off. That's normal. Just read through what it gives you, and if something doesn't look right, tell it. "Hey, that's not what I was going for" or "Try a different approach" is totally fine — it won't be offended.</p>
-<p class="reveal">And if you've been going back and forth for a while and it's not clicking, don't be afraid to just start a fresh conversation. Sometimes a clean slate with better context gets you there in 5 minutes.</p>
-
-<h3 class="reveal">6. When in doubt, show — don't tell</h3>
-<p class="reveal">Screenshots, error logs, example code, sample outputs, URLs to documentation — anything concrete you can paste or drag into the chat will outperform a verbal description.</p>
-
-<h3 class="reveal">7. If the answer feels wrong, tell it to search the web</h3>
-<p class="reveal"><strong>AI models run on training data — and training data gets stale.</strong> If the AI confidently tells you something that doesn't match what you're seeing, or gives you an answer that just feels off, tell it: <em>"Search the web to verify that."</em> Cursor can search the internet when you ask it to.</p>
-<p class="reveal">This is especially important for anything that changes frequently — API docs, library versions, framework syntax, or recent announcements. The AI might be working from information that was accurate 6 months ago but isn't anymore.</p>
-<div class="callout bad reveal"><p><strong style="color:var(--red);">Bad:</strong> Trusting the AI when it says "use <code>api.v2.create()</code>" without checking — that method might have been renamed or removed.</p></div>
-<div class="callout good reveal"><p><strong style="color:var(--green);">Good:</strong> "That doesn't look right. Search the web for the current API docs and verify."</p></div>
 
 </div>
 
